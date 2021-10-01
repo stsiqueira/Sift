@@ -2,6 +2,9 @@
   "expo": {
     "name": "sift",
     "slug": "sift",
+    "description": "A Langara capstone project to help people sift their trash.",
+    "owner": "sift",
+    "privacy": "public",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -28,6 +31,6 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": "A Langara capstone project tp help people sift their trash."
+
   }
 }
