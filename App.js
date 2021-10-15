@@ -15,7 +15,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false)
   return (
     <NavigationContainer>
-      {loggedIn ?
+      {!loggedIn ?
 
           <Tab.Navigator>
             <Tab.Screen name="Home" component={Home} />
