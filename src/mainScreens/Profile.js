@@ -43,6 +43,11 @@ const Profile = (props) => {
             />
           </View>
         </View>
+        <View>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Log Out</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -75,34 +80,15 @@ const styles = StyleSheet.create({
   },
   image:{
     width:'100%',
+    
+  },
+  button:{
+    alignItems: 'center'
+  },
+  buttonText:{
+    backgroundColor:"#E5E5E5",
+    fontSize:20,
   }
 
 });
 
-
-{/* <View style={styles.container}>
-
-
-<View style={styles.badges}>
-  <View style={styles.titleContainer}>
-    <Text style={styles.title}>Badges</Text>
-  </View>
-  <View style={styles.imageContainer}>
-    <Image 
-      source={require('../assets/images/wireframesIMG/Badges.png')}
-    />
-  </View>
-</View>
-
-
-<View style={styles.badges}>
-  <View style={styles.titleContainer}>
-    <Text style={styles.title}>History</Text>
-  </View>
-  <View style={styles.imageContainer}>
-    <Image 
-      source={require('../assets/images/wireframesIMG/Group69.png')}
-    />
-  </View>
-</View>
-</View> */}
