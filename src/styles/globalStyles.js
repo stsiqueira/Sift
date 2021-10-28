@@ -58,5 +58,15 @@ export const globalStyles = StyleSheet.create({
         fontFamily:"Lato-Bold",
         fontSize:24,
         lineHeight:29
-    }
+    },
+    iconContainer:{
+        borderBottomWidth:5,
+        flex:1,
+        justifyContent:"space-around",
+        alignItems:"center",
+        paddingHorizontal:10,
+    },
+    iconLabel:{
+        color: '#016089'
+    },
 })
