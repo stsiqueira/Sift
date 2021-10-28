@@ -1,60 +1,46 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, ScrollView, View, Image } from 'react-native';
+import CallToAction from '../component/CallToAction';
+import CarouselCards from '../component/CarouselCards';
+import { globalStyles } from '../styles/globalStyles';
+import ScreenHeading from '../subcomponents/ScreenHeading';
+import SectionHeading from '../subcomponents/SectionHeading';
 
+const features = [{text:'Sift can identify different materials and tell you how to properly dispose of them!', imageName:'CallToActionSearch.png' },
+                  {text:'Want to know where are the nearest Recycling Center Location? Sift can help you!', imageName:'CallToActionLocation.png'}]
+const promotions = [{text:'Take your cans to Regional Recycling this weekend and receive extra 20% on your refund!', imageName:'PromotionLocationCentre.png' }]
 
 
 const Home = (props) => {
 
   return (
-    <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.badges}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>Promotion</Text>
+    <View style={globalStyles.screenContainer}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.screenHeadingWrapper}>
+            <ScreenHeading title='Welcome to Sift'/>
           </View>
-          <View style={styles.imageContainer}>
-            <Image 
-              style={styles.image}
-              source={require('../assets/images/wireframesIMG/Group70.png')}
-            />
-          </View>
-        </View>
+          <View style={globalStyles.callToActionWrapper}>
+            <CallToAction 
+              text='Sift can identify different materials and tell you how to properly dispose of them!'
+              imageName='CallToActionSearch.png'/>
 
-        <View style={styles.badges}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>Did you Know</Text>
+            <CallToAction 
+              text='Want to know where are the nearest Recycling Center Location? Sift can help you!'
+              imageName='CallToActionLocation.png'/>
           </View>
-          <View style={styles.imageContainer}>
-            <Image 
-              style={styles.image}
-              source={require('../assets/images/wireframesIMG/Group58.png')}
-            />
-          </View>
-        </View>
-
-        <View style={styles.callToAction}>
-          <View style={styles.textContainer}>
-            <Text style={styles.callToActionText}>Want to know how you can recycle your waste? Scan it! Swift can identify different materials and tell you how to properly dispose of them!</Text>
-          </View>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Scan an object</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
 
 
-        <View style={styles.callToAction}>
-          <View style={styles.textContainer}>
-            <Text style={styles.callToActionText}>Want to know where are the nearest Recycling Center Location? Swift can help you!</Text>
+          <View style={globalStyles.promotionSectionWrapper}>
+            <SectionHeading title='Promotion'/>
+            <CallToAction 
+              text={promotions[0].text}
+              imageName={promotions[0].imageName}/>
           </View>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Find Recycling Center</Text>
-            </TouchableOpacity>
-          </View> 
-        </View>
 
+          <View style={globalStyles.carousel}>
+            <SectionHeading title='Did you Know?' center='center'/>
+            <CarouselCards/>
+          </View>
 
       </ScrollView >
     </View>
