@@ -16,7 +16,7 @@ const Home = (props) => {
   return (
     <View style={globalStyles.screenContainer}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.screenHeadingWrapper}>
+          <View style={globalStyles.screenHeadingWrapper}>
             <ScreenHeading title='Welcome to Sift'/>
           </View>
           <View style={globalStyles.callToActionWrapper}>
@@ -47,43 +47,4 @@ const Home = (props) => {
   );
 }
 export default Home;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width:'100%',
-    backgroundColor: '#fff',
-    paddingHorizontal:20,
-    paddingVertical:30,
-  },
-
-  title:{
-    fontSize:30,
-    fontWeight: 'bold',
-    paddingVertical:15
-  },
-  badges:{
-    width:'100%',
-    marginVertical:20
-  },
-  image:{
-    width:'100%',
-  },
-  buttonContainer:{
-    alignItems:'center'
-  },
-  button:{
-    backgroundColor:'black',
-    borderRadius:100,
-    paddingHorizontal:32,
-    paddingVertical:16
-  },
-  buttonText:{
-    color:'white',
-    fontSize:16,
-  },
-  textContainer:{
-    paddingVertical:15,
-  },
-
-});
 
