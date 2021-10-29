@@ -25,7 +25,7 @@ const PopularSearch = props => {
 			title: "Electronics",
 			itemID: "electronic_waste_e_waste",
 			image: <Electronics />,
-			titleColor: '#2E60A3'
+			titleColor: '#2C9CA4'
 		},
 		{
 			title: "Plastic",
@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 24,
 		fontWeight: 'bold',
+		fontFamily: 'Lato-Bold'
 	},
 	button: {
 		flexDirection: 'row',
@@ -92,11 +93,12 @@ const styles = StyleSheet.create({
 		marginRight: 15,
 	},
 	buttonTitleContainer: {
-		flex: 1
+		flex: 1,
 	},
 	buttonTitle: {
 		fontSize: 18,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		fontFamily: 'Lato-Bold'
 	}
 });
 

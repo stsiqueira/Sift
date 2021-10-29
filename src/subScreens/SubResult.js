@@ -25,7 +25,7 @@ const SubResult = props => {
 	const [instructions, setinstructions] = useState(props.route.params.data.instructions)
 
 	const compostBinLink = () => {
-		WebBrowser.openBrowserAsync('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+		WebBrowser.openBrowserAsync('https://www.google.com/search?q=How+to+create+a+compost+bin&oq=How+to+create+a+compost+bin&aqs=chrome..69i57.193j0j7&sourceid=chrome&ie=UTF-8');
 	}
 
 	return (
@@ -130,7 +130,8 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		textAlign: 'center',
 		color: '#134075',
-		paddingBottom: 20
+		paddingBottom: 20,
+		fontFamily: 'Lato-Bold'
 	},
 	card: {
 		padding: 20,
@@ -139,7 +140,8 @@ const styles = StyleSheet.create({
 	itemName: {
 		fontSize: 24,
 		fontWeight: 'bold',
-		textTransform: 'capitalize'
+		textTransform: 'capitalize',
+		fontFamily: 'Lato-Bold'
 	},
 	itemNameContainer: {
 		alignItems: 'center',
@@ -150,7 +152,8 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 	},
 	instructions: {
-		fontSize: 14
+		fontSize: 14,
+		fontFamily: 'Lato-Regular'
 	},
 	instructionsContainer: {
 		marginBottom: 20,
@@ -160,7 +163,8 @@ const styles = StyleSheet.create({
 		fontWeight: '900',
 		fontStyle: 'italic',
 		textDecorationLine: 'underline',
-		color: '#028CA1'
+		color: '#028CA1',
+		fontFamily: 'Lato-Black'
 	},
 	bottomContainer: {
 		alignItems: 'center',
@@ -179,7 +183,8 @@ const styles = StyleSheet.create({
 	recyclingCenterButtonText: {
 		color: '#ffffff',
 		fontSize: 16,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		fontFamily: 'Lato-Bold'
 	}
 });
 

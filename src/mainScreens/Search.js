@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
   cancelButtonText: {
 		color: '#ffffff',
 		fontSize: 14,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
+		fontFamily: 'Lato-Bold'
 	}
 });

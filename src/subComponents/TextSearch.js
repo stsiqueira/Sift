@@ -139,7 +139,8 @@ const styles = StyleSheet.create({
 		borderRightColor: 'transparent',
 		borderBottomColor: '#E4E6EE',
 		borderWidth: 1,
-		fontSize: 14
+		fontSize: 14,
+		fontFamily: 'Lato-Regular'
 	}
 });
 

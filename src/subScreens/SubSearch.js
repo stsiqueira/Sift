@@ -15,7 +15,13 @@ const SubSearch = props => {
 	}
 
 	return (
-    <View style={styles.container}>
+    <ScrollView
+			contentContainerStyle={!inputFocused ? styles.container : styles.containerSearching}
+			scrollEnabled={true}
+			showsVerticalScrollIndicator={true}
+			keyboardShouldPersistTaps={"always"}
+			keyboardDismissMode='on-drag'
+		>
 			{
 				!inputFocused ?
 				(
@@ -36,12 +42,18 @@ const SubSearch = props => {
 				handleInputBlurred={handleInputBlurred}
 				navigation={props.navigation}
 			/>
-    </View>
+    </ScrollView>
 	)
 }
 
 const styles = StyleSheet.create({
 	container: {
+		padding: 20,
+		backgroundColor: '#f3f4f8',
+		// justifyContent: 'flex-start',
+		// flex: 1
+	},
+	containerSearching: {
 		padding: 20,
 		backgroundColor: '#f3f4f8',
 		justifyContent: 'flex-start',
@@ -58,7 +70,8 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		textAlign: 'center',
 		paddingLeft: 25,
-		paddingRight: 25
+		paddingRight: 25,
+		fontFamily: 'Lato-Bold'
 	},
 	seperatorLine: {
 		backgroundColor: 'rgba(0, 48, 111, 0.32)',
