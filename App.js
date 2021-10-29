@@ -12,14 +12,16 @@ import Login from './src/mainScreens/login';
 const Tab = createBottomTabNavigator();
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(true)
   return (
     <NavigationContainer>
       {loggedIn ?
 
           <Tab.Navigator>
             <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="Search" component={Search} />
+            <Tab.Screen name="Search" component={Search}
+							options={{ headerShown: false }}
+						/>
             <Tab.Screen name="Camera" component={Camera} />
             <Tab.Screen name="RCL" component={RCL} />
             <Tab.Screen name="Profile" component={Profile} />
@@ -28,16 +30,8 @@ const App = () => {
         :
         <Login setLoggedIn={setLoggedIn}/>
       }
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </NavigationContainer>
   );
 }
-export default App;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App

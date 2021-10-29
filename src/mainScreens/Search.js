@@ -1,25 +1,81 @@
+import React, { useState } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import SubSearch from '../subScreens/SubSearch';
+import SubResult from '../subScreens/SubResult';
+import { Button, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+const Stack = createNativeStackNavigator();
 
+const Search = props => {
 
+	const [showCancelButton, setShowCancelButton] = useState(false)
 
-const Search = (props) => {
+	const CancelButton = props => {
+		return (
+			<>
+				{
+					showCancelButton ?
+					<TouchableOpacity style={styles.cancelButton}>
+						<Text style={styles.cancelButtonText}>Cancel</Text>
+					</TouchableOpacity>
+					: null
+				}
+			</>
+		)
+	}
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={()=>handleLogin()}>
-        <Text>Search Screen</Text>
-      </TouchableOpacity>
-    </View>
+    <NavigationContainer independent={true}>
+			<Stack.Navigator>
+				<Stack.Screen
+					name="Search"
+					component={SubSearch}
+					options={({
+						headerShown: true,
+						headerStyle: {
+							backgroundColor: '#134075',
+						},
+						headerTintColor: '#ffffff',
+						headerTitleStyle: {
+							fontWeight: 'bold',
+							fontSize: 20
+						},
+						headerRight: () => (
+							<CancelButton />
+						)
+					})}
+				/>
+				<Stack.Screen
+					name="Result"
+					component={SubResult}
+					options={{
+						headerTitle: "Search",
+						headerShown: true,
+						headerStyle: {
+							backgroundColor: '#134075',
+						},
+						headerTintColor: '#ffffff',
+						headerTitleStyle: {
+							fontWeight: 'bold',
+						},
+						headerBackTitleVisible: false
+					}}
+				/>
+			</Stack.Navigator>
+    </NavigationContainer>
   );
 }
+
 export default Search;
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+	cancelButton: {
+		textAlign: 'right'
+	},
+  cancelButtonText: {
+		color: '#ffffff',
+		fontSize: 14,
+		fontWeight: 'bold'
+	}
 });
