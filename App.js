@@ -77,7 +77,8 @@ const App = () => {
                     source={require('./src/assets/images/navigationIcons/search.png')}/>
                     <Text style={globalStyles.iconLabel}> Search</Text>
                   </View>
-                )
+                ),
+								headerShown: false
               }}
            />
             <Tab.Screen name="Camera" component={Camera} 

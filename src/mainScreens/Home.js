@@ -3,8 +3,8 @@ import { StyleSheet, Text, TouchableOpacity, ScrollView, View, Image } from 'rea
 import CallToAction from '../component/CallToAction';
 import CarouselCards from '../component/CarouselCards';
 import { globalStyles } from '../styles/globalStyles';
-import ScreenHeading from '../subcomponents/ScreenHeading';
-import SectionHeading from '../subcomponents/SectionHeading';
+import ScreenHeading from '../subComponents/ScreenHeading'
+import SectionHeading from '../subComponents/SectionHeading'
 
 const features = [{text:'Sift can identify different materials and tell you how to properly dispose of them!', imageName:'CallToActionSearch.png' },
                   {text:'Want to know where are the nearest Recycling Center Location? Sift can help you!', imageName:'CallToActionLocation.png'}]
