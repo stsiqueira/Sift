@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import SubSearch from '../subScreens/SubSearch';
 import SubResult from '../subScreens/SubResult';
-import { Button, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Button, Keyboard, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +16,7 @@ const Search = props => {
 			<>
 				{
 					showCancelButton ?
-					<TouchableOpacity style={styles.cancelButton}>
+					<TouchableOpacity style={styles.cancelButton} onPress={() => keyboardDismiss()}>
 						<Text style={styles.cancelButtonText}>Cancel</Text>
 					</TouchableOpacity>
 					: null
@@ -24,6 +24,15 @@ const Search = props => {
 			</>
 		)
 	}
+
+	const keyboardDismiss = () => {
+		Keyboard.dismiss()
+		setShowCancelButton(false)
+	}
+
+	Keyboard.addListener('keyboardDidHide', (e) => {
+		setShowCancelButton(false)
+	});
 
   return (
     <NavigationContainer independent={true}>
@@ -45,6 +54,9 @@ const Search = props => {
 							<CancelButton />
 						)
 					})}
+					initialParams={{
+						setShowCancelButton: setShowCancelButton
+					}}
 				/>
 				<Stack.Screen
 					name="Result"

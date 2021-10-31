@@ -5,13 +5,16 @@ import ItemData from '../assets/jsonData/data.json'
 import SearchInput from '../svgComponents/searchInput/SearchInput'
 import { useHeaderHeight } from '@react-navigation/elements';
 const TextSearch = props => {
-	const [value, onChangeText] = React.useState('');
-	const [matches, setMatches] = React.useState([]);
+	const [keyword, setKeyword] = React.useState('')
+	const [matches, setMatches] = React.useState([])
 	const headerHeight = useHeaderHeight();
 	const [inputFocused, setInputFocused] = useState(true)
 
+	const setShowCancelButton = props.setShowCancelButton
+
 	const handleInputFocused = () => {
 		setInputFocused(true)
+		setShowCancelButton(true)
 	}
 
 	const handleInputBlurred = () => {
@@ -20,7 +23,7 @@ const TextSearch = props => {
 	}
 
 	const autoComplete = (keyword) => {
-		// setMatches([]);
+		setMatches([]);
 		if (keyword.length >= 1) {
 			let data = [];
 			ItemNames.forEach(e1 => {
@@ -79,7 +82,7 @@ const TextSearch = props => {
 				<SearchInput />
 				<TextInput
 					onChangeText={text => {
-						onChangeText(text)
+						setKeyword(text)
 						autoComplete(text.toString().toLowerCase())
 					}}
 					onFocus={() => {
@@ -90,7 +93,8 @@ const TextSearch = props => {
 						props.handleInputBlurred()
 						handleInputBlurred()
 					}}
-					value={value}
+					inputFocused={true}
+					value={keyword}
 					autoCompleteType={'off'}
 					placeholder='Search for an item'
 					style={styles.searchInputText}

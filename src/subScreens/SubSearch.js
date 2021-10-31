@@ -14,6 +14,8 @@ const SubSearch = props => {
 		setInputFocused(false)
 	}
 
+	const setShowCancelButton = props.route.params.setShowCancelButton
+
 	return (
     <ScrollView
 			contentContainerStyle={!inputFocused ? styles.container : styles.containerSearching}
@@ -41,6 +43,7 @@ const SubSearch = props => {
 				handleInputFocused={handleInputFocused}
 				handleInputBlurred={handleInputBlurred}
 				navigation={props.navigation}
+				setShowCancelButton={setShowCancelButton}
 			/>
     </ScrollView>
 	)
