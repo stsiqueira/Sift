@@ -12,6 +12,9 @@ import Login from './src/mainScreens/login';
 import { useFonts }from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { globalStyles } from './src/styles/globalStyles';
+import { NativeBaseProvider } from 'native-base';
+import SVGComponent from './src/svgComponents/SvgComponent';
+import * as svgImg from './src/services/Images'
 
 
 const Tab = createBottomTabNavigator();
@@ -34,109 +37,90 @@ const App = () => {
 		return null;
 	}
   return (
-    <NavigationContainer>
-      {!loggedIn ?
-          <Tab.Navigator
-            screenOptions={{
-              tabBarShowLabel: false,
-              headerStyle: { backgroundColor: '#134075'},  
-              headerTitleStyle:{
-                fontFamily:'Lato-Bold',
-                fontSize:20,
-                lineHeight:24
-              },
-              headerTintColor:'#fff',
-              tabBarStyle:{
-                borderTopColor:'#00306F',
-                borderTopWidth:10,
-                height:110,
-                backgroundColor: '#fff'
-              }
-            }}
-           >
-            <Tab.Screen name="Home" component={Home}  
-              options={{
-                tabBarIcon:({focused}) => (
-                  <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: {borderBottomColor: '#fff'}]}>
-                    <Image
-                      style={{flex:1}}
-                      resizeMode='contain'
-                      source={require('./src/assets/images/navigationIcons/home.png')}/>
-                    <Text style={globalStyles.iconLabel}> Home</Text>
-                  </View>
-                )
+    <NativeBaseProvider>
+      <NavigationContainer>
+        {!loggedIn ?
+            <Tab.Navigator
+              screenOptions={{
+                tabBarShowLabel: false,
+                headerStyle: { backgroundColor: '#134075'},  
+                headerTitleStyle:{
+                  fontFamily:'Lato-Bold',
+                  fontSize:20,
+                  lineHeight:24
+                },
+                headerTintColor:'#fff',
+                tabBarStyle:{
+                  borderTopColor:'#00306F',
+                  borderTopWidth:10,
+                  height:110,
+                  backgroundColor: '#fff'
+                }
               }}
-            />
-            <Tab.Screen name="Search" component={Search} 
-              options={{
-                tabBarIcon:({focused}) => (
-                  <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: {borderBottomColor: '#fff'}]}>
-                    <Image
-                    style={{flex:1}}
-                    resizeMode='contain'
-                    source={require('./src/assets/images/navigationIcons/search.png')}/>
-                    <Text style={globalStyles.iconLabel}> Search</Text>
-                  </View>
-                ),
-								headerShown: false
-              }}
-           />
-            <Tab.Screen name="Camera" component={Camera} 
-              options={{
-                tabBarIcon:({focused}) => (
-                  <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: {borderBottomColor: '#fff'}]}>
-                    <View style={{ 
-                        width:50, flex:1, backgroundColor:'#016089',
-                        borderBottomLeftRadius:30,
-                        borderBottomRightRadius:30,
-                        justifyContent:'center', alignItems:'center', paddingBottom:10
-                        }}>
-                        <View style={{ 
-                        width:35, height:35, backgroundColor:'#fff',
-                        borderRadius:'50%'
-
-                        }}>
-
-                        </View>
-
+            >
+              <Tab.Screen name="Home" component={Home}  
+                options={{
+                  tabBarIcon:({focused}) => (
+                    <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: {borderBottomColor: '#fff'}]}>
+                       <SVGComponent img={svgImg.homeIcon}/>
+                      <Text style={globalStyles.iconLabel}> Home</Text>
                     </View>
-                    <Text style={globalStyles.iconLabel}> Scan</Text>
-                  </View>
-                )
-              }}
+                  )
+                }}
+              />
+              <Tab.Screen name="Search" component={Search} 
+                options={{
+                  tabBarIcon:({focused}) => (
+                    <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: {borderBottomColor: '#fff'}]}>
+                      <SVGComponent img={svgImg.searchIcon}/>
+                      <Text style={globalStyles.iconLabel}> Search</Text>
+                    </View>
+                  ),
+                  headerShown: false
+                }}
             />
-            <Tab.Screen name="Depots" component={RCL} 
-              options={{
-                tabBarIcon:({focused}) => (
-                  <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: {borderBottomColor: '#fff'}]}>
-                    <Image
-                      style={{flex:1}}
-                      resizeMode='contain'
-                      source={require('./src/assets/images/navigationIcons/location.png')}/>
-                    <Text style={globalStyles.iconLabel}> Depots</Text>
-                  </View>
-                )
-              }}
-             />
-            <Tab.Screen name="Profile" component={Profile} 
-              options={{
-                tabBarIcon:({focused}) => (
-                  <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: {borderBottomColor: '#fff'}]}>
-                    <Image
-                      style={{flex:1}}
-                      resizeMode='contain'
-                      source={require('./src/assets/images/navigationIcons/profile.png')}/>
-                    <Text style={globalStyles.iconLabel}> Profile</Text>
-                  </View>
-                ),
-              }}
-             />
-          </Tab.Navigator>
-        :
-        <Login setLoggedIn={setLoggedIn}/>
-      }
-      <StatusBar style="auto" style='light' />
-    </NavigationContainer>
+              <Tab.Screen name="Camera" component={Camera} 
+                options={{
+                  tabBarIcon:({focused}) => (
+                    <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: {borderBottomColor: '#fff'}]}>
+                      <View>
+                      <SVGComponent img={svgImg.cameraIcon}/>
+
+                      </View>
+                      <Text style={globalStyles.iconLabel}> Scan</Text>
+                    </View>
+                  )
+                }}
+              />
+              <Tab.Screen name="Depots" component={RCL} 
+                options={{
+                  tabBarIcon:({focused}) => (
+                    <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: { borderBottomColor: '#fff'}]}>
+                      <SVGComponent img={svgImg.locationIcon}/>
+                      <Text style={globalStyles.iconLabel}> Depots</Text>
+                    </View>
+                  )
+                }}
+              />
+              <Tab.Screen name="Profile" component={Profile} 
+                options={{
+                  tabBarIcon:({focused}) => (
+                    <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: {borderBottomColor: '#fff'}]}>
+                      <SVGComponent img={svgImg.profileIcon}/>
+                      <Text style={globalStyles.iconLabel}> Profile</Text>
+                    </View>
+                  ),
+                }}
+              />
+            </Tab.Navigator>
+          :
+          
+          <Login setLoggedIn={setLoggedIn}/>
+        }
+        <StatusBar style="auto" style='light' />
+      </NavigationContainer>
+    </NativeBaseProvider>
+
   );
 }
 export default App;

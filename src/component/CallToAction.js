@@ -1,16 +1,15 @@
 import React from "react";
 import { Text, TouchableOpacity, View, Image } from "react-native";
+import { SvgUri } from "react-native-svg";
 import { globalStyles } from "../styles/globalStyles";
+import SVGComponent from "../svgComponents/SvgComponent";
 
 const CallToAction = ( props ) => {
-    const image = `../assets/images/${props.imageName}`;
-    console.log(image)
+    // console.log("calltoAction ==========", props.imageName)
     return (
         <TouchableOpacity style={globalStyles.CallToActionContainer}>
             <View style={globalStyles.CallToActionImageContainer}>
-                    <Image 
-                        style={globalStyles.image}
-                        source={require('../assets/images/CallToActionSearch.png')} />
+                <SVGComponent img={props.imageName}/>
             </View>   
             <View style={globalStyles.CallToActionTextButtonContainer}>
                 <View style={globalStyles.CallToActionTextContainer}>

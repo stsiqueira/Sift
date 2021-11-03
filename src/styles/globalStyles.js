@@ -69,4 +69,25 @@ export const globalStyles = StyleSheet.create({
     iconLabel:{
         color: '#016089'
     },
+    filtersSection:{
+    },
+    filtersContainer:{
+        borderWidth:1,
+        borderColor:'#E4E6EE',
+        paddingVertical:8,
+        paddingHorizontal:16,
+        backgroundColor:'white',
+        borderRadius:5,
+        marginVertical:8,
+    },
+    filterContainer:{
+        flexDirection:"row",
+    },
+    textContainer:{
+        paddingVertical:8,
+        paddingHorizontal:16,
+    },
+
+
+
 })
