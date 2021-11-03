@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import PopularSearch from '../subcomponents/PopularSearch'
-import TextSearch from '../subcomponents/TextSearch'
+import PopularSearch from '../subComponents/PopularSearch'
+import TextSearch from '../subComponents/TextSearch'
 
 const SubSearch = props => {
 	const [inputFocused, setInputFocused] = useState(false)
