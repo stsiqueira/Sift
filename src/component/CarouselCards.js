@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, SafeAreaView} from "react-native"
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem'
+// import a from '../assets/images/carousel/'
 
 const CarouselCards = () => {
   const isCarousel = React.useRef(null)

@@ -1,17 +1,14 @@
 
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Location from '../stack/location/Location';
 
 
 
 const RCL = (props) => {
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={()=>handleLogin()}>
-        <Text>RCL Screen</Text>
-      </TouchableOpacity>
-    </View>
+      <Location />
   );
 }
 export default RCL;
