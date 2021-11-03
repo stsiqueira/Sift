@@ -3,8 +3,8 @@ import { StyleSheet, Text, TouchableOpacity, ScrollView, View, Image } from 'rea
 import CallToAction from '../component/CallToAction';
 import CarouselCards from '../component/CarouselCards';
 import { globalStyles } from '../styles/globalStyles';
-import ScreenHeading from '../subcomponents/ScreenHeading'
-import SectionHeading from '../subcomponents/SectionHeading'
+import ScreenHeading from '../subComponents/ScreenHeading'
+import SectionHeading from '../subComponents/SectionHeading'
 import * as svgImg from '../services/Images'
 
 
