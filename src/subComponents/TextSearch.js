@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, TextInput, View, KeyboardAvoidingView, ScrollView, Text, TouchableOpacity } from 'react-native'
 import ItemNames from '../assets/jsonData/names.json'
 import ItemData from '../assets/jsonData/data.json'
@@ -9,6 +9,8 @@ const TextSearch = props => {
 	const [matches, setMatches] = React.useState([])
 	const headerHeight = useHeaderHeight();
 	const [inputFocused, setInputFocused] = useState(true)
+	const [itemNames, setItemNames] = useState(ItemNames)
+	const [itemData, setItemData] = useState(ItemData)
 
 	const setShowCancelButton = props.setShowCancelButton
 
@@ -26,7 +28,7 @@ const TextSearch = props => {
 		setMatches([]);
 		if (keyword.length >= 1) {
 			let data = [];
-			ItemNames.forEach(e1 => {
+			itemNames.forEach(e1 => {
 				if (e1.id.replaceAll("_", " ").includes(keyword)) {
 					data.push(e1);
 				}
@@ -36,7 +38,7 @@ const TextSearch = props => {
 	}
 
 	const showInstructions = (id) => {
-		const data = ItemData.find(el => el.id === id);
+		const data = itemData.find(el => el.id === id);
 		if (data) {
 			props.navigation.navigate('Result', {
 				pageType: 'text',
@@ -47,6 +49,55 @@ const TextSearch = props => {
 			// no results was found for the searched keyword
 		}
 	}
+
+	const getItemNames = () => {
+		fetch("http:127.0.0.1:4000/graphql", {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				query: `
+					{
+						items{
+							id
+							name
+							category
+							instructions
+						}
+					}
+				`
+			}),
+		})
+		.then(res => res.json())
+		.then(res => {
+			setItemData(res.data.items)
+		});
+	}
+
+	const getItemData = () => {
+		fetch("http:127.0.0.1:4000/graphql", {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				query: `
+					{
+						items{
+							id
+							name
+						}
+					}
+				`
+			}),
+		})
+		.then(res => res.json())
+		.then(res => {
+			setItemNames(res.data.items)
+		});
+	}
+
+	useEffect(() => {
+		// getItemNames()
+		// getItemData()
+	}, [])
 
 	return (
 		<KeyboardAvoidingView
