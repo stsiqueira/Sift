@@ -10,7 +10,6 @@ import RCL from './src/mainScreens/RCL';
 import Profile from './src/mainScreens/Profile';
 import Login from './src/mainScreens/login';
 import { useFonts }from 'expo-font';
-import { Ionicons } from '@expo/vector-icons';
 import { globalStyles } from './src/styles/globalStyles';
 import { NativeBaseProvider } from 'native-base';
 import SVGComponent from './src/svgComponents/SvgComponent';

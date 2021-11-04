@@ -86,8 +86,37 @@ export const globalStyles = StyleSheet.create({
     textContainer:{
         paddingVertical:8,
         paddingHorizontal:16,
+        flex:1
     },
-
-
-
+	searchInputContainer: {
+		flexDirection: 'row',
+		padding: 7,
+		backgroundColor: '#FFFFFF',
+		borderColor: '#E4E6EE',
+		borderWidth: 1,
+		borderRadius: 6,
+		marginTop:32
+	},
+	searchInputText: {
+		marginLeft: 10,
+		fontSize: 14,
+		flex: 1
+	},
+    button:{
+        backgroundColor:"#134075",
+        paddingVertical:16,
+        paddingHorizontal:32,
+        width:112,
+        height:51,
+        marginTop:24
+    },
+    locationCard:{
+        backgroundColor: '#FFFFFF',
+        borderWidth:1,
+        borderColor: '#E4E6EE',
+        borderRadius:5,
+        marginBottom:16,
+        paddingVertical:8,
+        paddingHorizontal:14
+    },
 })

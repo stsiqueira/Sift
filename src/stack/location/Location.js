@@ -1,16 +1,20 @@
 import React, { useState, useEffect }from "react";  
-import { Image, ScrollView, View, Text, TouchableOpacity } from "react-native";
+import { Image, ScrollView, View, Text, TextInput, TouchableOpacity } from "react-native";
 import Filter from "../../component/Filter";
 import { globalStyles } from "../../styles/globalStyles";
-import ScreenHeading from "../../subComponents/ScreenHeading";
-import SectionHeading from "../../subComponents/SectionHeading"
+import ScreenHeading from "../../subcomponents/ScreenHeading";
+import SectionHeading from "../../subcomponents/SectionHeading"
 import * as svgImg from '../../services/Images'
 import * as GeoLocation from 'expo-location';
 import getDistance from 'geolib/es/getDistance';
+import { searchInput } from '../../services/Images'
+import SVGComponent from "../../svgComponents/SvgComponent";
+import { Center, Spacer } from "native-base";
 
-const Location = () => {
+const Location = ( props ) => {
     const [userGeoLocation, setUserGeoLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
+    const [inputLocation, setInputLocation ] = useState()
 
     useEffect(() => {
         (async () => {
@@ -25,6 +29,12 @@ const Location = () => {
         })();
       }, []);
 
+    const HandleSearch = () => {
+        props.navigation.navigate('LocationResult', {
+            latitude:userGeoLocation.coords.latitude,
+            longitude:userGeoLocation.coords.longitude
+        })
+    }
 
     return (
         <View style={globalStyles.screenContainer}>
@@ -45,12 +55,30 @@ const Location = () => {
                         example='eg: glass bottles'
                         imageName={svgImg.glass}/>
                 </View>
-                <Text>My lat: {userGeoLocation ? userGeoLocation.coords.latitude : " "} </Text>
-                <Text>My long: {userGeoLocation? userGeoLocation.coords.longitude : " "}</Text>
 
-                <TouchableOpacity style={{borderWidth:2, width:'40%', margin:90}}>
-                    <Text>Search</Text>
-                </TouchableOpacity>
+                <View style={globalStyles.searchInputContainer}>
+                        <SVGComponent img={searchInput}/>
+                        <TextInput
+                            onChangeText={text => {
+                            }}
+                            onFocus={() => {
+                            }}
+                            onBlur={() => {
+                            }}
+                            inputFocused={true}
+                            value={inputLocation}
+                            autoCompleteType={'off'}
+                            placeholder='Search by address'
+                            style={globalStyles.searchInputText}
+                            placeholderTextColor={'#000000'}
+                        />
+                </View>
+                <Center>
+                    <TouchableOpacity style={globalStyles.button} onPress={()=> HandleSearch()}>
+                        <Text style={{color:'white', fontSize:16, fontFamily:'Lato-Bold'}}>Search</Text>
+                    </TouchableOpacity>
+                </Center>
+
             </ScrollView>
         </View>
     )

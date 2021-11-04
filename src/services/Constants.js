@@ -15,3 +15,4 @@ export default carouselImages = [
       imgUrl: "https://picsum.photos/id/12/200/300"
     }
   ]
+
