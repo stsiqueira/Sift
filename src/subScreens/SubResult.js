@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
-import { Button, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import RecyclingCenterIllustration from '../svgComponents/searchResult/RecyclingCenterIllustration'
-import RecycleIllustration from '../svgComponents/searchResult/PlasticIllustration'
-import RecycleBin from '../svgComponents/searchResult/PlasticBin'
-import OrganicIllustration from '../svgComponents/searchResult/OrganicIllustration'
-import OrganicBin from '../svgComponents/searchResult/OrganicBin'
-import GlassBin from '../svgComponents/searchResult/GlassBin'
-import GlassIllustration from '../svgComponents/searchResult/GlassIllustration'
-import PaperBin from '../svgComponents/searchResult/PaperBin'
-import PaperIllustration from '../svgComponents/searchResult/PaperIllustration'
-import GarbageBin from '../svgComponents/searchResult/GarbageBin'
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {
+	recyclingCentreIllustration,
+	plasticBin,
+	organicIllustration,
+	organicBin,
+	glassBin,
+	glassIllustration,
+	paperBin,
+	paperIllustration,
+	garbageBin,
+	plasticIllustration
+} from '../services/Images'
+import SVGComponent from "../svgComponents/SvgComponent"
 import * as WebBrowser from 'expo-web-browser'
 
 const SubResult = props => {
@@ -56,27 +59,27 @@ const SubResult = props => {
 								<View style={styles.imageContainer}>
 									{
 										itemType.toLowerCase() === 'recycling-center' ?
-										(<RecyclingCenterIllustration />): null
+										(<SVGComponent img={recyclingCentreIllustration} />): null
 									}
 									{
 										itemType.toLowerCase() === 'blue-box' ?
-										(<RecycleBin />): null
+										(<SVGComponent img={plasticBin} />): null
 									}
 									{
 										itemType.toLowerCase() === 'grey-box' ?
-										(<GlassBin />): null
+										(<SVGComponent img={glassBin} />): null
 									}
 									{
 										itemType.toLowerCase() === 'compost-bin' ?
-										(<OrganicBin />): null
+										(<SVGComponent img={organicBin} />): null
 									}
 									{
 										itemType.toLowerCase() === 'yellow-bag' ?
-										(<PaperBin />): null
+										(<SVGComponent img={paperBin} />): null
 									}
 									{
 										itemType.toLowerCase() === 'garbage-bin' ?
-										(<GarbageBin />): null
+										(<SVGComponent img={garbageBin} />): null
 									}
 								</View>
 								<View style={styles.instructionsContainer}>
@@ -85,19 +88,19 @@ const SubResult = props => {
 								<View style={styles.illustrationContainer}>
 									{
 										itemType.toLowerCase() === 'blue-box' ?
-										(<RecycleIllustration />): null
+										(<SVGComponent img={plasticIllustration} />): null
 									}
 									{
 										itemType.toLowerCase() === 'grey-box' ?
-										(<GlassIllustration />): null
+										(<SVGComponent img={glassIllustration} />): null
 									}
 									{
 										itemType.toLowerCase() === 'compost-bin' ?
-										(<OrganicIllustration />): null
+										(<SVGComponent img={organicIllustration} />): null
 									}
 									{
 										itemType.toLowerCase() === 'yellow-bag' ?
-										(<PaperIllustration />): null
+										(<SVGComponent img={paperIllustration} />): null
 									}
 								</View>
 							</View>

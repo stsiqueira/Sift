@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, TextInput, View, KeyboardAvoidingView, ScrollView, Text, TouchableOpacity } from 'react-native'
 import ItemNames from '../assets/jsonData/names.json'
 import ItemData from '../assets/jsonData/data.json'
-import SearchInput from '../svgComponents/searchInput/SearchInput'
 import { useHeaderHeight } from '@react-navigation/elements';
+import { searchInput } from '../services/Images'
+import SVGComponent from "../svgComponents/SvgComponent"
+
 const TextSearch = props => {
 	const [keyword, setKeyword] = React.useState('')
 	const [matches, setMatches] = React.useState([])
@@ -130,7 +132,7 @@ const TextSearch = props => {
 				) : null
 			}
 			<View style={styles.searchInputContainer}>
-				<SearchInput />
+				<SVGComponent img={searchInput}/>
 				<TextInput
 					onChangeText={text => {
 						setKeyword(text)

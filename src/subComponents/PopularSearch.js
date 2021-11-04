@@ -1,10 +1,13 @@
 import React from 'react'
 import { StyleSheet, Image, View, Text, TouchableOpacity } from 'react-native'
 import ItemData from '../assets/jsonData/data.json'
-import Electronics from '../svgComponents/popularSearch/Electronics'
-import Glass from '../svgComponents/popularSearch/Glass'
-import Organic from '../svgComponents/popularSearch/Organic'
-import Plastic from '../svgComponents/popularSearch/Plastic'
+import {
+	electronicsPopularSearch,
+	plasticPopularSearch,
+	glassPopularSearch,
+	organicPopularSearch
+} from '../services/Images'
+import SVGComponent from "../svgComponents/SvgComponent"
 
 const PopularSearch = props => {
 	const showInstructions = (id) => {
@@ -24,25 +27,25 @@ const PopularSearch = props => {
 		{
 			title: "Electronics",
 			itemID: "electronic_waste_e_waste",
-			image: <Electronics />,
+			image: <SVGComponent img={electronicsPopularSearch}/>,
 			titleColor: '#2C9CA4'
 		},
 		{
 			title: "Plastic",
 			itemID: "plastic",
-			image: <Plastic />,
+			image: <SVGComponent img={plasticPopularSearch}/>,
 			titleColor: '#3E5BA5'
 		},
 		{
 			title: "Glass",
 			itemID: "coloured_glass_bottles_and_jars",
-			image: <Glass />,
+			image: <SVGComponent img={glassPopularSearch}/>,
 			titleColor: '#999999'
 		},
 		{
 			title: "Organic",
 			itemID: "organic",
-			image: <Organic />,
+			image: <SVGComponent img={organicPopularSearch}/>,
 			titleColor: '#48B47B'
 		},
 	];
