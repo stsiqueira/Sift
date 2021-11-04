@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Button, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import RecyclingCenterIllustration from '../svgComponents/searchResult/RecyclingCenterIllustration'
 import RecycleIllustration from '../svgComponents/searchResult/PlasticIllustration'
 import RecycleBin from '../svgComponents/searchResult/PlasticBin'
@@ -13,11 +13,9 @@ import GarbageBin from '../svgComponents/searchResult/GarbageBin'
 import * as WebBrowser from 'expo-web-browser'
 
 const SubResult = props => {
-
-	const [data, setData] = useState(props.route.params.data)
-
 	const [pageType, setPageType] = useState(props.route.params.pageType)
 	const [searchID, setSearchID] = useState(props.route.params.searchID)
+	const [searchImage, setSearchImage] = useState('https://picsum.photos/1080/1920')
 
 	const [itemName, setItemName] = useState(props.route.params.data.name)
 	const [itemType, setItemType] = useState(props.route.params.data.category)
@@ -29,101 +27,120 @@ const SubResult = props => {
 	}
 
 	return (
-		<ScrollView style={styles.container}>
-			{
-				pageType === 'text' ?
-				(
-					<>
-						<Text style={styles.title}>{itemName}</Text>
-						<View style={styles.card}>
-							<View style={styles.itemNameContainer}>
-								<Text style={styles.itemName}>You have to use:</Text>
-								<Text style={styles.itemName}>{disposeType}</Text>
+		<>
+			<ScrollView>
+				{
+					pageType === 'image' ?
+					(
+						<View>
+							<Image
+								style={styles.searchImage}
+								source={{
+									uri: searchImage,
+								}}
+							/>
+						</View>
+					)
+					: null
+				}
+				{
+					pageType === 'text' ?
+					(
+						<View style={styles.container}>
+							<Text style={styles.title}>{itemName}</Text>
+							<View style={styles.card}>
+								<View style={styles.itemNameContainer}>
+									<Text style={styles.itemName}>You have to use:</Text>
+									<Text style={styles.itemName}>{disposeType}</Text>
+								</View>
+								<View style={styles.imageContainer}>
+									{
+										itemType.toLowerCase() === 'recycling-center' ?
+										(<RecyclingCenterIllustration />): null
+									}
+									{
+										itemType.toLowerCase() === 'blue-box' ?
+										(<RecycleBin />): null
+									}
+									{
+										itemType.toLowerCase() === 'grey-box' ?
+										(<GlassBin />): null
+									}
+									{
+										itemType.toLowerCase() === 'compost-bin' ?
+										(<OrganicBin />): null
+									}
+									{
+										itemType.toLowerCase() === 'yellow-bag' ?
+										(<PaperBin />): null
+									}
+									{
+										itemType.toLowerCase() === 'garbage-bin' ?
+										(<GarbageBin />): null
+									}
+								</View>
+								<View style={styles.instructionsContainer}>
+									<Text style={styles.instructions}>{instructions}</Text>
+								</View>
+								<View style={styles.illustrationContainer}>
+									{
+										itemType.toLowerCase() === 'blue-box' ?
+										(<RecycleIllustration />): null
+									}
+									{
+										itemType.toLowerCase() === 'grey-box' ?
+										(<GlassIllustration />): null
+									}
+									{
+										itemType.toLowerCase() === 'compost-bin' ?
+										(<OrganicIllustration />): null
+									}
+									{
+										itemType.toLowerCase() === 'yellow-bag' ?
+										(<PaperIllustration />): null
+									}
+								</View>
 							</View>
-							<View style={styles.imageContainer}>
+							<View style={styles.bottomContainer}>
+								{
+									itemType.toLowerCase() === 'compost-bin' ?
+									(
+										<Text
+											onPress={() => compostBinLink()}
+											style={styles.link}
+										>
+											How to create a compost bin
+										</Text>
+									)
+									: null
+								}
 								{
 									itemType.toLowerCase() === 'recycling-center' ?
-									(<RecyclingCenterIllustration />): null
-								}
-								{
-									itemType.toLowerCase() === 'blue-box' ?
-									(<RecycleBin />): null
-								}
-								{
-									itemType.toLowerCase() === 'grey-box' ?
-									(<GlassBin />): null
-								}
-								{
-									itemType.toLowerCase() === 'compost-bin' ?
-									(<OrganicBin />): null
-								}
-								{
-									itemType.toLowerCase() === 'yellow-bag' ?
-									(<PaperBin />): null
-								}
-								{
-									itemType.toLowerCase() === 'garbage-bin' ?
-									(<GarbageBin />): null
-								}
-							</View>
-							<View style={styles.instructionsContainer}>
-								<Text style={styles.instructions}>{instructions}</Text>
-							</View>
-							<View style={styles.illustrationContainer}>
-								{
-									itemType.toLowerCase() === 'blue-box' ?
-									(<RecycleIllustration />): null
-								}
-								{
-									itemType.toLowerCase() === 'grey-box' ?
-									(<GlassIllustration />): null
-								}
-								{
-									itemType.toLowerCase() === 'compost-bin' ?
-									(<OrganicIllustration />): null
-								}
-								{
-									itemType.toLowerCase() === 'yellow-bag' ?
-									(<PaperIllustration />): null
+									(
+										<TouchableOpacity
+											style={styles.recyclingCenterButton}
+										>
+											<Text style={styles.recyclingCenterButtonText}>Find Recycling Center</Text>
+										</TouchableOpacity>
+									)
+									: null
 								}
 							</View>
 						</View>
-						<View style={styles.bottomContainer}>
-							{
-								itemType.toLowerCase() === 'compost-bin' ?
-								(
-									<Text
-										onPress={() => compostBinLink()}
-										style={styles.link}
-									>
-										How to create a compost bin
-									</Text>
-								)
-								: null
-							}
-							{
-								itemType.toLowerCase() === 'recycling-center' ?
-								(
-									<TouchableOpacity
-										style={styles.recyclingCenterButton}
-									>
-										<Text style={styles.recyclingCenterButtonText}>Find Recycling Center</Text>
-									</TouchableOpacity>
-								)
-								: null
-							}
-						</View>
-					</>
-				)
-				: null
-			}
-		</ScrollView>
+					)
+					: null
+				}
+			</ScrollView>
+		</>
 	)
 }
 
 const styles = StyleSheet.create({
 	container: {
-		padding: 20
+		padding: 20,
+		borderTopLeftRadius: 20,
+		borderTopRightRadius: 20,
+		backgroundColor: '#f3f4f8'
 	},
 	title: {
 		fontSize: 36,
@@ -185,6 +202,11 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontWeight: 'bold',
 		fontFamily: 'Lato-Bold'
+	},
+	searchImage: {
+		width: '100%',
+		height: 200,
+		transform: [{ scale: 1.2 }]
 	}
 });
 
