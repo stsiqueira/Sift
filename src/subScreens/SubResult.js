@@ -10,7 +10,10 @@ import {
 	paperBin,
 	paperIllustration,
 	garbageBin,
-	plasticIllustration
+	plasticIllustration,
+	garbageIllustration,
+	cupsWidthPlasticLidAndPaperSleeveIllustration,
+	glassBottlesWithPlasticLid
 } from '../services/Images'
 import SVGComponent from "../svgComponents/SvgComponent"
 import * as WebBrowser from 'expo-web-browser'
@@ -46,16 +49,83 @@ const SubResult = props => {
 					)
 					: null
 				}
-				{
-					pageType === 'text' ?
-					(
-						<View style={styles.container}>
+				<View style={styles.container}>
+					{
+						pageType === 'text' && searchID !== 'glass_bottle_with_plastic_lid' && searchID !== 'cup_with_plastic_lid_and_paper_sleeve' ?
+						(
 							<Text style={styles.title}>{itemName}</Text>
-							<View style={styles.card}>
-								<View style={styles.itemNameContainer}>
-									<Text style={styles.itemName}>You have to use:</Text>
-									<Text style={styles.itemName}>{disposeType}</Text>
+						)
+						:
+						(
+							<View style={styles.specialItemNameContainer}>
+								<Text style={styles.itemName}>You have to use:</Text>
+								{
+									searchID !== 'glass_bottle_with_plastic_lid' && searchID !== 'cup_with_plastic_lid_and_paper_sleeve' ?
+									(
+										<Text style={styles.specialItemName}>{disposeType}</Text>
+									) :
+									(
+										<Text style={styles.specialItemName}>Multiple Bins</Text>
+									)
+								}
+							</View>
+						)
+					}
+					{
+						searchID === 'glass_bottle_with_plastic_lid' || searchID === 'cup_with_plastic_lid_and_paper_sleeve' ?
+						(
+							<>
+								<View style={styles.instructionsContainer}>
+									<Text style={styles.specialInstructions}>{instructions}</Text>
 								</View>
+								<View style={styles.specialCardOne}>
+									{
+										searchID === 'glass_bottle_with_plastic_lid' ?
+										(
+											<SVGComponent img={cupsWidthPlasticLidAndPaperSleeveIllustration} />
+										)
+										:
+										(
+											<SVGComponent img={glassBottlesWithPlasticLid} />
+										)
+									}
+								</View>
+								<View style={styles.specialCardTwo}>
+									<View style={styles.specialCardTwoInnerOne}>
+										<SVGComponent img={plasticBin} />
+										<Text style={styles.specialCardTwoInnerText}>Blue Bin</Text>
+									</View>
+									{
+										searchID === 'glass_bottle_with_plastic_lid' ?
+										(
+											<View style={styles.specialCardTwoInnerTwo}>
+												<SVGComponent img={glassBin} />
+												<Text style={styles.specialCardTwoInnerText}>Grey Bin</Text>
+											</View>
+										)
+										:
+										(
+											<View style={styles.specialCardTwoInnerTwo}>
+												<SVGComponent img={paperBin} />
+												<Text style={styles.specialCardTwoInnerText}>Yellow Bag</Text>
+											</View>
+										)
+									}
+								</View>
+							</>
+						)
+						:
+						(
+							<View style={styles.card}>
+								{
+									pageType === 'text' ?
+									(
+										<View style={styles.itemNameContainer}>
+											<Text style={styles.itemName}>You have to use:</Text>
+											<Text style={styles.itemName}>{disposeType}</Text>
+										</View>
+									) : null
+								}
 								<View style={styles.imageContainer}>
 									{
 										itemType.toLowerCase() === 'recycling-center' ?
@@ -102,37 +172,40 @@ const SubResult = props => {
 										itemType.toLowerCase() === 'yellow-bag' ?
 										(<SVGComponent img={paperIllustration} />): null
 									}
+									{
+										itemType.toLowerCase() === 'garbage-bin' ?
+										(<SVGComponent img={garbageIllustration} />): null
+									}
 								</View>
 							</View>
-							<View style={styles.bottomContainer}>
-								{
-									itemType.toLowerCase() === 'compost-bin' ?
-									(
-										<Text
-											onPress={() => compostBinLink()}
-											style={styles.link}
-										>
-											How to create a compost bin
-										</Text>
-									)
-									: null
-								}
-								{
-									itemType.toLowerCase() === 'recycling-center' ?
-									(
-										<TouchableOpacity
-											style={styles.recyclingCenterButton}
-										>
-											<Text style={styles.recyclingCenterButtonText}>Find Recycling Center</Text>
-										</TouchableOpacity>
-									)
-									: null
-								}
-							</View>
-						</View>
-					)
-					: null
-				}
+						)
+					}
+					<View style={styles.bottomContainer}>
+						{
+							itemType.toLowerCase() === 'compost-bin' ?
+							(
+								<Text
+									onPress={() => compostBinLink()}
+									style={styles.link}
+								>
+									How to create a compost bin
+								</Text>
+							)
+							: null
+						}
+						{
+							itemType.toLowerCase() === 'recycling-center' ?
+							(
+								<TouchableOpacity
+									style={styles.recyclingCenterButton}
+								>
+									<Text style={styles.recyclingCenterButtonText}>Find Recycling Center</Text>
+								</TouchableOpacity>
+							)
+							: null
+						}
+					</View>
+				</View>
 			</ScrollView>
 		</>
 	)
@@ -156,6 +229,44 @@ const styles = StyleSheet.create({
 	card: {
 		padding: 20,
 		backgroundColor: '#ffffff',
+		borderColor: '#E4E6EE',
+		borderWidth: 1,
+		borderRadius: 5
+	},
+	specialCardOne: {
+		padding: 20,
+		backgroundColor: '#ffffff',
+		borderColor: '#E4E6EE',
+		borderWidth: 1,
+		borderRadius: 5,
+		marginBottom: 16
+	},
+	specialCardTwo: {
+		padding: 20,
+		backgroundColor: '#ffffff',
+		borderColor: '#E4E6EE',
+		borderWidth: 1,
+		borderRadius: 5,
+		flexDirection: 'row',
+		justifyContent: 'space-between'
+	},
+	specialCardTwoInnerOne: {
+		alignItems: 'center',
+		flex: 1,
+		paddingRight: 50,
+		transform: [{scale: 0.8}]
+	},
+	specialCardTwoInnerTwo: {
+		alignItems: 'center',
+		flex: 1,
+		transform: [{scale: 0.8}]
+	},
+	specialCardTwoInnerText: {
+		fontSize: 16,
+		fontFamily: 'Lato-Regular',
+		textAlign: 'center',
+		marginTop: 12,
+		transform: [{scale: 1.2}]
 	},
 	itemName: {
 		fontSize: 24,
@@ -163,9 +274,20 @@ const styles = StyleSheet.create({
 		textTransform: 'capitalize',
 		fontFamily: 'Lato-Bold'
 	},
+	specialItemName: {
+		fontSize: 36,
+		fontWeight: 'bold',
+		textTransform: 'capitalize',
+		fontFamily: 'Lato-Bold'
+	},
 	itemNameContainer: {
 		alignItems: 'center',
-		marginBottom: 20,
+		marginBottom: 20
+	},
+	specialItemNameContainer: {
+		alignItems: 'center',
+		marginBottom: 25,
+		marginTop: 10
 	},
 	imageContainer: {
 		alignItems: 'center',
@@ -174,6 +296,11 @@ const styles = StyleSheet.create({
 	instructions: {
 		fontSize: 14,
 		fontFamily: 'Lato-Regular'
+	},
+	specialInstructions: {
+		fontSize: 18,
+		fontFamily: 'Lato-Bold',
+		marginTop: 16
 	},
 	instructionsContainer: {
 		marginBottom: 20,

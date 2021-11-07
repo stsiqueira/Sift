@@ -2,8 +2,8 @@ import React, { useState, useEffect }from "react";
 import { Image, ScrollView, View, Text, TextInput, TouchableOpacity } from "react-native";
 import Filter from "../../component/Filter";
 import { globalStyles } from "../../styles/globalStyles";
-import ScreenHeading from "../../subcomponents/ScreenHeading";
-import SectionHeading from "../../subcomponents/SectionHeading"
+import ScreenHeading from "../../subComponents/ScreenHeading";
+import SectionHeading from "../../subComponents/SectionHeading"
 import * as svgImg from '../../services/Images'
 import * as GeoLocation from 'expo-location';
 import getDistance from 'geolib/es/getDistance';
