@@ -856,6 +856,10 @@
 		"name": "Cups (compostable)"
 	},
 	{
+		"id": "cup_with_plastic_lid_and_paper_sleeve",
+		"name": "Cup with plastic lid and paper sleeve"
+	},
+	{
 		"id": "curling_iron",
 		"name": "Curling iron"
 	},
@@ -1502,6 +1506,10 @@
 	{
 		"id": "glass_bottles_and_jars",
 		"name": "Glass bottles and jars"
+	},
+	{
+		"id": "glass_bottle_with_plastic_lid",
+		"name": "Glass bottle with plastic lid"
 	},
 	{
 		"id": "glass_cleaner_plastic_bottle",

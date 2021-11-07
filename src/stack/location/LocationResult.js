@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Image, ScrollView, View, Text, TouchableOpacity, Button, FlatList} from "react-native";
 import { globalStyles } from "../../styles/globalStyles";
-import ScreenHeading from "../../subcomponents/ScreenHeading";
-import SectionHeading from "../../subcomponents/SectionHeading"
+import ScreenHeading from "../../subComponents/ScreenHeading";
+import SectionHeading from "../../subComponents/SectionHeading"
 import LocationCard from "./LocationCard";
 import RClocation from "../../services/RecyclingCentres"
 

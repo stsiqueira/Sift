@@ -1284,6 +1284,12 @@
 		"instructions": "This item can be disposed of in your Garbage bin. To help prevent the spread of COVID-19 and protect our waste collection staff, all garbage must be placed in plastic bags and tied securely before putting in your Garbage bin.Do NOT place loose or un-bagged waste in the Garbage bin. Thanks for your cooperation. "
 	},
 	{
+		"id": "cup_with_plastic_lid_and_paper_sleeve",
+		"name": "Cup with plastic lid and paper sleeve",
+		"category": "blue-box paper-bin",
+		"instructions": "This item has different materials, you have to separate them and out in different bins."
+	},
+	{
 		"id": "curling_iron",
 		"name": "Curling iron",
 		"category": "recycling-center",
@@ -2254,6 +2260,12 @@
 		"name": "Glass bottles and jars",
 		"category": "grey-box",
 		"instructions": "This item can be placed in your Grey Box (single family homes) or in the cart labelled glass bottles + jars (multi-family sites).  "
+	},
+	{
+		"id": "glass_bottle_with_plastic_lid",
+		"name": "Glass bottle with plastic lid",
+		"category": "blue-box grey-box",
+		"instructions": "This item has different materials, you have to separate them and out in different bins."
 	},
 	{
 		"id": "glass_cleaner_plastic_bottle",
