@@ -158,6 +158,7 @@ const TextSearch = props => {
 		</KeyboardAvoidingView>
 	)
 }
+export default TextSearch;
 
 const styles = StyleSheet.create({
 	container: {
@@ -201,4 +202,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default TextSearch
+

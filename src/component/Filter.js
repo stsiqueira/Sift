@@ -3,13 +3,18 @@ import { View, Text } from 'react-native'
 import { globalStyles } from "../styles/globalStyles";
 import { Checkbox, HStack, Spacer } from 'native-base';
 import SVGComponent from "../svgComponents/SvgComponent";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Filter = ( props) => {
 
-    const [isSelected, setSelection] = useState(false);
+    const [isSelected, setSelection] = useState(true);
+
+
 
     return (
-        <View style={globalStyles.filtersContainer}>
+        <View 
+            style={globalStyles.filtersContainer}
+            >
             <View style={globalStyles.filterContainer}>
                 <View style={globalStyles.filterImageContainer}>
                     <SVGComponent img={props.imageName} />
@@ -21,7 +26,8 @@ const Filter = ( props) => {
                         <Spacer/>
                         <Checkbox 
                             value={isSelected}
-                            onChange={setSelection}/>
+                            onChange={()=>props.handleSelect(props.title)}
+                            accessibilityLabel={`${props.title}`}/>
                     </HStack>
                 </View>
             </View>

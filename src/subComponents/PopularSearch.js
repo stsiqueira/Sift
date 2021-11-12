@@ -76,6 +76,7 @@ const PopularSearch = props => {
 		</View>
 	)
 }
+export default PopularSearch;
 
 const styles = StyleSheet.create({
 	title: {
@@ -105,4 +106,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default PopularSearch
+

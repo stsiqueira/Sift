@@ -50,19 +50,32 @@ const App = () => {
                 },
                 headerTintColor:'#fff',
                 tabBarStyle:{
-                  borderTopColor:'#00306F',
+                  borderTopColor:'#00306F', 
                   borderTopWidth:10,
-                  height:110,
-                  backgroundColor: '#fff'
+                  paddingTop:0,
+                  height:99,
+                  backgroundColor: '#fff',
                 }
               }}
             >
               <Tab.Screen name="Home" component={Home}  
                 options={{
                   tabBarIcon:({focused}) => (
-                    <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: {borderBottomColor: '#fff'}]}>
-                       <SVGComponent img={svgImg.homeIcon}/>
-                      <Text style={globalStyles.iconLabel}> Home</Text>
+                    <View style={[globalStyles.iconContainer]}>
+                      {
+                        focused ? 
+                          <View>
+                            <SVGComponent img={svgImg.homeIconActive}/>
+                          </View>
+                          :
+                          <View>
+                            <SVGComponent img={svgImg.homeIcon}/>
+                          </View>
+                      }
+                              <View >
+                              <Text style={globalStyles.iconLabel}> Home</Text>
+                              </View>
+                        
                     </View>
                   )
                 }}
@@ -70,9 +83,21 @@ const App = () => {
               <Tab.Screen name="Search" component={Search} 
                 options={{
                   tabBarIcon:({focused}) => (
-                    <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: {borderBottomColor: '#fff'}]}>
-                      <SVGComponent img={svgImg.searchIcon}/>
-                      <Text style={globalStyles.iconLabel}> Search</Text>
+                    <View style={[globalStyles.iconContainer]}>  
+                    {
+                        focused ? 
+                          <View>
+                            <SVGComponent img={svgImg.searchIconActive}/>
+                          </View>
+                          :
+                          <View>
+                            <SVGComponent img={svgImg.searchIcon}/> 
+                          </View>
+                    }         
+                    <View >
+                    <Text style={globalStyles.iconLabel}> Search</Text>
+                    </View>
+                     
                     </View>
                   ),
                   headerShown: false
@@ -81,12 +106,14 @@ const App = () => {
               <Tab.Screen name="Camera" component={Camera} 
                 options={{
                   tabBarIcon:({focused}) => (
-                    <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: {borderBottomColor: '#fff'}]}>
-                      <View>
-                      <SVGComponent img={svgImg.cameraIcon}/>
-
-                      </View>
-                      <Text style={globalStyles.iconLabel}> Scan</Text>
+                    <View style={[globalStyles.iconContainer]}>
+                          <View>
+                            <SVGComponent img={svgImg.cameraIcon}/>
+                          </View>
+                          <View >
+                          <Text style={globalStyles.iconLabel}>Scan</Text>
+                          </View>
+                     
                     </View>
                   )
                 }}
@@ -94,9 +121,20 @@ const App = () => {
               <Tab.Screen name="Depots" component={RCL} 
                 options={{
                   tabBarIcon:({focused}) => (
-                    <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: { borderBottomColor: '#fff'}]}>
-                      <SVGComponent img={svgImg.locationIcon}/>
-                      <Text style={globalStyles.iconLabel}> Depots</Text>
+                    <View style={[globalStyles.iconContainer]}>
+                      {
+                        focused ? 
+                          <View>
+                            <SVGComponent img={svgImg.locationIconActive}/>
+                          </View>
+                          :
+                          <View>
+                            <SVGComponent img={svgImg.locationIcon}/>
+                          </View>
+                      }
+                          <View>
+                            <Text style={globalStyles.iconLabel}> Depots</Text>
+                          </View>
                     </View>
                   )
                 }}
@@ -104,9 +142,21 @@ const App = () => {
               <Tab.Screen name="Profile" component={Profile} 
                 options={{
                   tabBarIcon:({focused}) => (
-                    <View style={[globalStyles.iconContainer, focused ? {borderBottomColor: '#016089'}: {borderBottomColor: '#fff'}]}>
-                      <SVGComponent img={svgImg.profileIcon}/>
-                      <Text style={globalStyles.iconLabel}> Profile</Text>
+                    <View style={[globalStyles.iconContainer]}>
+                      {
+                        focused ? 
+                          <View>
+                            <SVGComponent img={svgImg.profileIconActive}/>
+                          </View>
+                          :
+                          <View>
+                            <SVGComponent img={svgImg.profileIcon}/>
+                          </View>
+                      }
+                          <View>
+                          <Text style={globalStyles.iconLabel}>Profile</Text>
+                          </View>
+                      
                     </View>
                   ),
                 }}

@@ -2,7 +2,6 @@ import React from 'react'
 import { StyleSheet, SafeAreaView} from "react-native"
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem'
-// import a from '../assets/images/carousel/'
 
 const CarouselCards = () => {
   const isCarousel = React.useRef(null)
@@ -11,15 +10,15 @@ const CarouselCards = () => {
   const carouselImages = [
     {
       id:1,
-      imgUrl: "https://picsum.photos/id/11/200/300"
+      imgPath: '../assets/images/carousel/Aluminum.png'
     },
     {
       id:2,
-      imgUrl: "https://picsum.photos/id/10/200/300"
+      imgPath: 'Grass'
     },
     {
       id:3,
-      imgUrl: "https://picsum.photos/id/12/200/300"
+      imgPath: 'Light'
     }
   ]
 
@@ -41,14 +40,19 @@ const CarouselCards = () => {
         activeDotIndex={index}
         carouselRef={isCarousel}
         dotStyle={{
-          width: 10,
-          height: 10,
+          width: 24,
+          height: 8,
           borderRadius: 5,
           marginHorizontal: 0,
+          backgroundColor: '#9BD8DE'
+        }}
+        inactiveDotOpacity={1}
+        inactiveDotStyle={{
+          width: 16,
+          height: 16,
+          borderRadius: 8,
           backgroundColor: '#0398A8'
         }}
-        inactiveDotOpacity={0.4}
-        inactiveDotScale={0.6}
         tappableDots={true}
       />
    </SafeAreaView>
@@ -63,5 +67,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 50,
     marginTop:12,
+    marginBottom:50,
   },
 });
