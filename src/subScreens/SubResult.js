@@ -32,6 +32,7 @@ const SubResult = props => {
 		WebBrowser.openBrowserAsync('https://www.google.com/search?q=How+to+create+a+compost+bin&oq=How+to+create+a+compost+bin&aqs=chrome..69i57.193j0j7&sourceid=chrome&ie=UTF-8');
 	}
 
+	// fix for going back directly to search result page
 	Keyboard.dismiss()
 
 	return (
