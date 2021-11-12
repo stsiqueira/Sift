@@ -31,7 +31,7 @@ const TextSearch = props => {
 		if (keyword.length >= 1) {
 			let data = [];
 			itemNames.forEach(e1 => {
-				if (e1.id.replaceAll("_", " ").includes(keyword)) {
+				if (e1.id.replace("/_/g", " ").includes(keyword)) {
 					data.push(e1);
 				}
 			});
@@ -47,6 +47,7 @@ const TextSearch = props => {
 				searchID: id,
 				data: data,
 			})
+			setKeyword('')
 		} else {
 			// no results was found for the searched keyword
 		}
