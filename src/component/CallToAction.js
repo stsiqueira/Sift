@@ -1,13 +1,18 @@
 import React from "react";
-import { Text, TouchableOpacity, View, Image } from "react-native";
-import { SvgUri } from "react-native-svg";
+import { Text, TouchableOpacity, View} from "react-native";
 import { globalStyles } from "../styles/globalStyles";
 import SVGComponent from "../svgComponents/SvgComponent";
+import { rightArrow } from "../services/Images";
+import { useNavigation } from "@react-navigation/core";
+
+
 
 const CallToAction = ( props ) => {
-    // console.log("calltoAction ==========", props.imageName)
+    const navigation = useNavigation()
     return (
-        <TouchableOpacity style={globalStyles.CallToActionContainer}>
+        <TouchableOpacity 
+            style={globalStyles.CallToActionContainer}
+            onPress={()=> navigation.navigate(props.link)}>
             <View style={globalStyles.CallToActionImageContainer}>
                 <SVGComponent img={props.imageName}/>
             </View>   
@@ -16,9 +21,7 @@ const CallToAction = ( props ) => {
                     <Text style={globalStyles.CallToActionText}>{props.text}</Text>
                 </View>   
                 <View style={globalStyles.CallToActionButtonContainer}>
-                    <Image 
-                        style={globalStyles.image}
-                        source={require('../assets/images/CallToActionRigthArrow.png')} />
+                    <SVGComponent img={rightArrow}/>
                 </View>   
             </View>
         </TouchableOpacity>

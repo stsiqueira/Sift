@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, ScrollView, View, Image } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import CallToAction from '../component/CallToAction';
 import CarouselCards from '../component/CarouselCards';
 import { globalStyles } from '../styles/globalStyles';
 import ScreenHeading from '../subComponents/ScreenHeading'
-import SectionHeading from '../subComponents/SectionHeading'
-import * as svgImg from '../services/Images'
+import SectionHeading from '../subComponents/SectionHeading';
+import { CallToActionSearch, CallToActionLocation, PromotionRecycling } from '../services/Images'
 
 
 const features = [{text:'Sift can identify different materials and tell you how to properly dispose of them!', imageName:'CallToActionSearch.png' },
@@ -13,22 +13,24 @@ const features = [{text:'Sift can identify different materials and tell you how 
 const promotions = [{text:'Take your cans to Regional Recycling this weekend and receive extra 20% on your refund!', imageName:'PromotionLocationCentre.png' }]
 
 const Home = (props) => {
-  // console.log("home==========", svgImg.CallToActionSearch)
+
   return (
     <View style={globalStyles.screenContainer}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false} style={{paddingVertical:30}}>
           <View style={globalStyles.screenHeadingWrapper}>
             <ScreenHeading title='Welcome to Sift'/>
           </View>
           <View style={globalStyles.callToActionWrapper}>
             <CallToAction 
               text='Sift can identify different materials and tell you how to properly dispose of them!'
-              imageName={svgImg.CallToActionSearch}
+              imageName={CallToActionSearch}
+              link='Search'
               />
 
             <CallToAction 
               text='Want to know where are the nearest Recycling Center Location? Sift can help you!'
-              imageName={svgImg.CallToActionLocation}
+              imageName={CallToActionLocation}
+              link='Depots'
               />
           </View>
 
@@ -37,7 +39,8 @@ const Home = (props) => {
             <SectionHeading title='Promotion'/>
             <CallToAction 
               text={promotions[0].text}
-              imageName={svgImg.PromotionRecycling}
+              imageName={PromotionRecycling}
+              link='Home'
               />
           </View>
 

@@ -7,7 +7,6 @@ export const globalStyles = StyleSheet.create({
         width:'100%',
         backgroundColor: '#F3F4F8',
         paddingHorizontal:20,
-        paddingVertical:30,
       },
     callToActionWrapper:{
         paddingBottom:30,
@@ -21,12 +20,11 @@ export const globalStyles = StyleSheet.create({
         flexDirection:"row",
     },
     CallToActionImageContainer:{
-        padding: 24,
         backgroundColor: '#fff',
         borderWidth:1,
         borderColor:'#E4E6EE',
         borderTopLeftRadius:5,
-        borderBottomLeftRadius:5
+        borderBottomLeftRadius:5,
     },
     CallToActionTextButtonContainer:{
         backgroundColor: darkBlue,
@@ -60,14 +58,13 @@ export const globalStyles = StyleSheet.create({
         lineHeight:29
     },
     iconContainer:{
-        borderBottomWidth:5,
         flex:1,
         justifyContent:"space-around",
         alignItems:"center",
         paddingHorizontal:10,
     },
     iconLabel:{
-        color: '#016089'
+        color: '#016089',
     },
     filtersSection:{
     },
@@ -75,7 +72,7 @@ export const globalStyles = StyleSheet.create({
         borderWidth:1,
         borderColor:'#E4E6EE',
         paddingVertical:8,
-        paddingHorizontal:16,
+        paddingHorizontal:8,
         backgroundColor:'white',
         borderRadius:5,
         marginVertical:8,
@@ -119,4 +116,7 @@ export const globalStyles = StyleSheet.create({
         paddingVertical:8,
         paddingHorizontal:14
     },
+    locationCardMoreInfo:{
+        fontSize:14,lineHeight:25, fontFamily:'Lato-Regular', marginBottom:8
+    }
 })

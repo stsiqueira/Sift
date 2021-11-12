@@ -1,18 +1,25 @@
 import React from 'react'
-import { View, Text, StyleSheet, Dimensions, Image } from "react-native"
+import { View, StyleSheet, Dimensions, Image } from "react-native"
+import Aluminum from '../assets/images/carousel/Aluminum.png'
+import Grass from '../assets/images/carousel/Grass.png'
+import Light from '../assets/images/carousel/Light.png'
 
 export const SLIDER_WIDTH = Dimensions.get('window').width + 10
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.65)
 
 const CarouselCardItem = ({ item, index }) => {
-  console.log(item.imgUrl)
+
+  // const test= '../assets/images/carousel/Aluminum.png'
+  // console.log(test, item.imgPath)
+  // console.log("index->", item)
+
   return (
     <View style={styles.container} key={index}>
+
       <Image
-        source={{ uri: item.imgUrl }}
+        source={Aluminum}
         style={styles.image}
       />
-
     </View>
   )
 }
@@ -33,7 +40,9 @@ const styles = StyleSheet.create({
   image: {
     width: ITEM_WIDTH,
     height: 300,
-    borderRadius:10
+    borderRadius:10,
+    resizeMode:'contain'
+    
   },
 
 })

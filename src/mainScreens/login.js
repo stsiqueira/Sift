@@ -2,6 +2,8 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import * as Google from 'expo-google-app-auth'
+import SVGComponent from '../svgComponents/SvgComponent';
+import { googleButton, Logo } from '../services/Images';
 
 
 const Login = (props) => {
@@ -32,15 +34,11 @@ const Login = (props) => {
   return (
     <View style={styles.container}>
       <View>
-        <Image 
-        source={require('../assets/images/Logo.png')}
-        style={{width:102, height:218}}/>
+        <SVGComponent img={Logo}/>
       </View>
 
       <TouchableOpacity onPress={()=>handleLogin()}>
-      <Image 
-        source={require('../assets/images/GoogleSignIn.png')}
-        />
+        <SVGComponent img={googleButton}/>
       </TouchableOpacity>
     </View>
   );
