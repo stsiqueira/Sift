@@ -28,10 +28,11 @@ const TextSearch = props => {
 
 	const autoComplete = (keyword) => {
 		setMatches([]);
-		if (keyword.length >= 1) {
+		let keywordLength = keyword.length;
+		if (keywordLength >= 1) {
 			let data = [];
 			itemNames.forEach(e1 => {
-				if (e1.id.replace("/_/g", " ").includes(keyword)) {
+				if (e1.id.replace(/_/g, " ").substring(0, keywordLength).toLowerCase().includes(keyword)) {
 					data.push(e1);
 				}
 			});
@@ -104,7 +105,7 @@ const TextSearch = props => {
 
 	return (
 		<KeyboardAvoidingView
-			behavior={Platform.OS === "ios" ? "padding" : "height"}
+			behavior={Platform.OS === "ios" ? "padding" : undefined}
 			style={styles.container}
 			keyboardVerticalOffset={headerHeight + 26}
 		>
