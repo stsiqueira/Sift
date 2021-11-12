@@ -25,7 +25,7 @@ const SubResult = props => {
 
 	const [itemName, setItemName] = useState(props.route.params.data.name)
 	const [itemType, setItemType] = useState(props.route.params.data.category)
-	const [disposeType, setDisposeType] = useState(props.route.params.data.category.replaceAll("-", " "))
+	const [disposeType, setDisposeType] = useState(props.route.params.data.category.replace("/-/g", " "))
 	const [instructions, setinstructions] = useState(props.route.params.data.instructions)
 
 	const compostBinLink = () => {
@@ -194,13 +194,22 @@ const SubResult = props => {
 							: null
 						}
 						{
-							itemType.toLowerCase() === 'recycling-center' ?
+							itemType.toLowerCase() === 'recycling-center' ||
+							itemType.toLowerCase() === 'grey-box' ||
+							itemType.toLowerCase() === 'blue-box' ?
 							(
-								<TouchableOpacity
-									style={styles.recyclingCenterButton}
-								>
-									<Text style={styles.recyclingCenterButtonText}>Find Recycling Center</Text>
-								</TouchableOpacity>
+								<>
+									<View style={styles.seperatorContainer}>
+										<View style={styles.seperatorLine}></View>
+										<Text style={styles.seperatorText}>or</Text>
+										<View style={styles.seperatorLine}></View>
+									</View>
+									<TouchableOpacity
+										style={styles.recyclingCenterButton}
+									>
+										<Text style={styles.recyclingCenterButtonText}>Find Recycling Center</Text>
+									</TouchableOpacity>
+								</>
 							)
 							: null
 						}
@@ -337,6 +346,26 @@ const styles = StyleSheet.create({
 		width: '100%',
 		height: 200,
 		transform: [{ scale: 1.2 }]
+	},
+	seperatorContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		marginTop: -15,
+		marginBottom: 30
+	},
+	seperatorText: {
+		fontSize: 18,
+		fontWeight: 'bold',
+		textAlign: 'center',
+		paddingLeft: 25,
+		paddingRight: 25,
+		fontFamily: 'Lato-Bold'
+	},
+	seperatorLine: {
+		backgroundColor: 'rgba(0, 48, 111, 0.32)',
+		borderRadius: 40,
+		height: 3,
+		flex: 1
 	}
 });
 
