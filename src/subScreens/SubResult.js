@@ -25,7 +25,7 @@ const SubResult = props => {
 
 	const [itemName, setItemName] = useState(props.route.params.data.name)
 	const [itemType, setItemType] = useState(props.route.params.data.category)
-	const [disposeType, setDisposeType] = useState(props.route.params.data.category.replace("/-/g", " "))
+	const [disposeType, setDisposeType] = useState(props.route.params.data.category.replace(/-/g, " "))
 	const [instructions, setinstructions] = useState(props.route.params.data.instructions)
 
 	const compostBinLink = () => {

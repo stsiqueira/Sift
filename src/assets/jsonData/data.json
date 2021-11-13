@@ -1650,6 +1650,12 @@
 		"instructions": "This item as well as other small appliances and power tools can be dropped for free as part of ElectroRecycle’s ‘Take-Back’ recycling program. Visit Electrocycle for program details, including a full list of accepted items and drop-off locations. If the item is still in good working condition, consider selling it, giving it to family or friends, or donating it to a local charity. Contact the BC Recycling Hotline for local donation options: 604-732-9253. "
 	},
 	{
+		"id": "electronics",
+		"name": "Electronics",
+		"category": "recycling-center",
+		"instructions": "This item as well as other small appliances and power tools can be dropped for free as part of ElectroRecycle’s ‘Take-Back’ recycling program. Visit Electrocycle for program details, including a full list of accepted items and drop-off locations. If the item is still in good working condition, consider selling it, giving it to family or friends, or donating it to a local charity. Contact the BC Recycling Hotline for local donation options: 604-732-9253. "
+	},
+	{
 		"id": "electronic_air_cleaner",
 		"name": "Electronic air cleaner",
 		"category": "recycling-center",
@@ -2254,6 +2260,12 @@
 		"name": "Gift wrap (paper)",
 		"category": "yellow-bag",
 		"instructions": "This item can be placed in your yellow bag (single family homes) or Mixed Paper cart (multi-family sites).    "
+	},
+	{
+		"id": "glass",
+		"name": "Glass",
+		"category": "grey-box",
+		"instructions": "This item can be placed in your Grey Box (single family homes) or in the cart labelled glass bottles + jars (multi-family sites).  "
 	},
 	{
 		"id": "glass_bottles_and_jars",
