@@ -26,7 +26,7 @@ const PopularSearch = props => {
 	const popularSearch = [
 		{
 			title: "Electronics",
-			itemID: "electronic_waste_e_waste",
+			itemID: "electronics",
 			image: <SVGComponent img={electronicsPopularSearch}/>,
 			titleColor: '#2C9CA4'
 		},
@@ -38,7 +38,7 @@ const PopularSearch = props => {
 		},
 		{
 			title: "Glass",
-			itemID: "coloured_glass_bottles_and_jars",
+			itemID: "glass",
 			image: <SVGComponent img={glassPopularSearch}/>,
 			titleColor: '#999999'
 		},
