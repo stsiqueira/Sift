@@ -2,12 +2,12 @@ import { StyleSheet } from "react-native";
 
 const darkBlue = '#134075'
 export const globalStyles = StyleSheet.create({
-    screenContainer: {
+    Container: {
         flex: 1,
         width:'100%',
         backgroundColor: '#F3F4F8',
-        paddingHorizontal:20,
-      },
+
+    },
     callToActionWrapper:{
         paddingBottom:30,
     },
@@ -117,6 +117,15 @@ export const globalStyles = StyleSheet.create({
         paddingHorizontal:14
     },
     locationCardMoreInfo:{
-        fontSize:14,lineHeight:25, fontFamily:'Lato-Regular', marginBottom:8
+        fontSize:14,lineHeight:25, fontFamily:'Lato-Regular', 
+        marginBottom:8
+    },
+    fontBold:{
+        fontFamily:'Lato-Bold'
+    },
+    historyText:{
+        fontFamily:'Lato-Regular',
+        fontSize:14,
+        lineHeight:20,
     }
 })
