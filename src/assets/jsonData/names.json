@@ -1392,12 +1392,8 @@
 		"name": "Fruit and Vegetable stickers"
 	},
 	{
-		"id": "fruit_cooked",
-		"name": "Fruit (cooked)"
-	},
-	{
-		"id": "fruit_uncooked",
-		"name": "Fruit (uncooked)"
+		"id": "fruit_raw",
+		"name": "Fruit"
 	},
 	{
 		"id": "furnace_filter_disposable",
@@ -3420,12 +3416,8 @@
 		"name": "VCR or DVD player"
 	},
 	{
-		"id": "vegetables_cooked",
-		"name": "Vegetables (cooked)"
-	},
-	{
-		"id": "vegetables_uncooked",
-		"name": "Vegetables (uncooked)"
+		"id": "vegetable_raw",
+		"name": "Vegetable"
 	},
 	{
 		"id": "vellum",

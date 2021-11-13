@@ -19,6 +19,7 @@ import * as svgImg from './src/services/Images'
 const Tab = createBottomTabNavigator();
 
 const App = () => {
+  console.disableYellowBox = true;
   const [loggedIn, setLoggedIn] = useState(false)
   const [fontsLoaded] = useFonts({
     'Lato-Black': require('./src/assets/fonts/Lato-Black.ttf'),
