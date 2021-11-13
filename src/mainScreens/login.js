@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import * as Google from 'expo-google-app-auth'
 import SVGComponent from '../svgComponents/SvgComponent';
@@ -7,7 +7,6 @@ import { googleButton, Logo } from '../services/Images';
 
 
 const Login = (props) => {
-  let [authState, setAuthState] = useState(null);
 
 
   const handleLogin = async () => {
@@ -19,16 +18,16 @@ const Login = (props) => {
     }
     Google.logInAsync(config)
       .then((result)=>{
-        // console.log(result) ---> HERE WE HAVE ACCESS TO TOKEN
+        console.log(result) //---> HERE WE HAVE ACCESS TO TOKEN, PLS SEND IT TO DB.
         const {type, user} = result;
         if(type == 'success'){
-          const {email, name, photoUrl} = user;
           props.setLoggedIn(true);
         }else{
           console.log('Google sign in was cancelled')
         }
       })
       .catch(error=> console.log(error))
+
   }
 
   return (

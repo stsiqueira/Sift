@@ -6,6 +6,7 @@ import SectionHeading from "../../subComponents/SectionHeading";
 import LocationCard from "./LocationCard";
 import RClocation from "../../services/RecyclingCentres"
 
+
 const LocationResult = ( props ) =>{
     const { latitude, longitude, filters } = props.route.params;
     const [ recycleCentres, setRecycleCentres ] = useState([])
