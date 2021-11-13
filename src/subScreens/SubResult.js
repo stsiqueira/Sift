@@ -21,7 +21,7 @@ import * as WebBrowser from 'expo-web-browser'
 const SubResult = props => {
 	const [pageType, setPageType] = useState(props.route.params.pageType)
 	const [searchID, setSearchID] = useState(props.route.params.searchID)
-	const [searchImage, setSearchImage] = useState('https://picsum.photos/1080/1920')
+	const [searchImage, setSearchImage] = useState(props.route.params.searchImage)
 
 	const [itemName, setItemName] = useState(props.route.params.data.name)
 	const [itemType, setItemType] = useState(props.route.params.data.category)
@@ -45,7 +45,7 @@ const SubResult = props => {
 							<Image
 								style={styles.searchImage}
 								source={{
-									uri: searchImage,
+									uri: `data:image/gif;base64,${searchImage}`,
 								}}
 							/>
 						</View>

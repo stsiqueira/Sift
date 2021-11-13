@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import SubSearch from '../subScreens/SubSearch';
 import SubResult from '../subScreens/SubResult';
+import FallbackLabels from '../subScreens/Fallback';
 import { Button, Keyboard, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 const Stack = createNativeStackNavigator();
@@ -34,11 +35,10 @@ const Search = props => {
 		setShowCancelButton(false)
 	});
 
-  return (
-    <NavigationContainer independent={true}>
+  return (    
 			<Stack.Navigator>
 				<Stack.Screen
-					name="Search"
+					name="SubSearch"
 					component={SubSearch}
 					options={({
 						headerShown: true,
@@ -74,8 +74,39 @@ const Search = props => {
 						headerBackTitleVisible: false
 					}}
 				/>
-			</Stack.Navigator>
-    </NavigationContainer>
+				<Stack.Screen
+					name="ScanResult"
+					component={SubResult}
+					options={{
+						headerTitle: "Scan",
+						headerShown: true,
+						headerStyle: {
+							backgroundColor: '#134075',
+						},
+						headerTintColor: '#ffffff',
+						headerTitleStyle: {
+							fontWeight: 'bold',
+						},
+						headerBackTitleVisible: false
+					}}
+				/>
+				<Stack.Screen
+					name="FallbackLabels"
+					component={FallbackLabels}
+					options={{
+						headerTitle: "Scan",
+						headerShown: true,
+						headerStyle: {
+							backgroundColor: '#134075',
+						},
+						headerTintColor: '#ffffff',
+						headerTitleStyle: {
+							fontWeight: 'bold',
+						},
+						headerBackTitleVisible: false
+					}}
+				/>
+			</Stack.Navigator>    
   );
 }
 
