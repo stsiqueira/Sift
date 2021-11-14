@@ -1,9 +1,9 @@
 
-import { FlatList, HStack, VStack } from 'native-base';
+import { Center, FlatList, HStack, VStack } from 'native-base';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image, ScrollView, SafeAreaView } from 'react-native';
 import { fontSize } from 'styled-system';
-import { badgeComplexObject, badgeFirstRecycling, badgeFirstScan, badgeTenScans } from '../services/BadgesImg';
+import { badgeComplexObject, badgeFirstRecycling, badgeFirstScan, badgeTenScans, grayBadgeFirstScan, noHistory } from '../services/BadgesImg';
 import { editIcon } from '../services/Images';
 import { globalStyles } from '../styles/globalStyles';
 import Badge from '../subComponents/Badge';
@@ -22,7 +22,7 @@ const Profile = (props) => {
     {
       id:1,
       name: "1st Scan",
-      image: badgeFirstScan
+      image: grayBadgeFirstScan
     },
     {
       id:2,
@@ -88,14 +88,21 @@ const Profile = (props) => {
             <SectionHeading title="History"/>
             <View style={styles.historyContainer}>
               {
-                userData.history ?
+                userData.history.length > 0 ?
                   userData.history.map((history)=>{
                     return (
                       <History key={history.id} history={history}/>
                     )
                   })
                 :
-                  <></>
+                  <View style={{ paddingHorizontal:16, paddingVertical:24 }}> 
+                    <Text style={[styles.historyText,{ lineHeight:25, fontSize:18, color:'#134075'}]}>You have no scans yet!</Text>
+                    <Text style={styles.historyText}>Click on Scan to start scanning objects and learn</Text>
+                    <Text style={styles.historyText}>how to recycle them</Text>
+                    <View style={{ alignItems:'center', paddingVertical:24}}>
+                      <SVGComponent img={noHistory} />
+                    </View>
+                  </View>
               }
             </View>
           </View>
@@ -128,6 +135,12 @@ const styles = StyleSheet.create({
     borderWidth:1,
     borderColor:'#E4E6EE',
     borderRadius:10,
-  }
+  },
+  historyText:{
+    fontFamily:'Lato-Bold', 
+    textAlign:'center',
+    lineHeight:20, 
+    fontSize:14,
+  },
 });
 

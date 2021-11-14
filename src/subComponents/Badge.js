@@ -1,6 +1,8 @@
 import React from "react"
 import { View, Text, StyleSheet } from 'react-native'
 import SVGComponent from "../svgComponents/SvgComponent"
+import { badgeComplexObject, badgeFirstRecycling, badgeFirstScan, badgeTenScans, 
+          grayBadgeFirstScan, grayBadgeComplexObject, grayBadgeFirstRecycling, grayBadgeTenScan } from '../services/BadgesImg';
 
 const Badge = (props) => {
     return(

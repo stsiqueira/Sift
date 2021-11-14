@@ -13,15 +13,11 @@ const LocationResult = ( props ) =>{
 
     useEffect(() => {
         (() => {
-            // console.log("filters->", filters)
-            const res = RClocation.locations.filter(item => {
-                item.location.categories.includes(filters)
-            });
-            console.log(res)
+                // FETCH BACK END USING FILTER ARRAY
         })();
 
     }, []);
-      console.log(RClocation.locations.categories)
+
     return (
         <View>
             <ScrollView style={{paddingVertical:30,paddingHorizontal:20}}  showsVerticalScrollIndicator={false} >
