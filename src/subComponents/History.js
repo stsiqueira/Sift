@@ -8,6 +8,8 @@ import SVGComponent from '../svgComponents/SvgComponent';
 
 const History = (props) =>{
 
+  
+
     return (
        <TouchableOpacity style={styles.historyItem}>
            <HStack>

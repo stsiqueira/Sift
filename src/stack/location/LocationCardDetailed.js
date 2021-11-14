@@ -1,25 +1,27 @@
-import { HStack, Spacer, VStack } from "native-base";
-import React, { useState } from "react";
-import {  View, Text, StyleSheet} from "react-native";
+import React from "react";
+import { HStack } from "native-base";
+import {  View, Text, StyleSheet, Platform, Linking} from "react-native";
 import { globalStyles } from "../../styles/globalStyles";
 import { topArrowIcon  } from "../../services/Images";
 import SVGComponent from "../../svgComponents/SvgComponent";
 import { TouchableOpacity } from "react-native-gesture-handler";
-// import LaunchNavigator from 'react-native-launch-navigator';
+
 
 const LocationCardDetailed = ( props ) => {
-    const [moreInfo, setMoreInfo] = useState(false)
-
-    const openGoogleMaps = (userLat, userLong, destinyLat, destinyLong) => {
-        LaunchNavigator.navigate([destinyLat,destinyLong], {
-            start: useLat, userLong
-        })
-            .then(() => console.log("Launched navigator"))
-            .catch((err) => console.error("Error launching navigator: "+err));
+    
+    const openGoogleMaps = ( Lat, Long) => {
+        const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
+        const latLng = `${Lat},${Long}`;
+        const label = props.company;
+        const url = Platform.select({
+            ios: `${scheme}${label}@${latLng}`,
+            android: `${scheme}${latLng}(${label})`
+        });
+        Linking.openURL(url);
     }
     return(
         <View style={{ flex:1, width:'100%'}}>
-            <Text style={{fontSize:16,lineHeight:20, fontFamily:'Lato-Bold', marginBottom: moreInfo ? 16 : 8}}>{props.company}</Text>
+            <Text style={{fontSize:16,lineHeight:20, fontFamily:'Lato-Bold', marginBottom: props.moreInfo ? 16 : 8}}>{props.company}</Text>
             <HStack>
                 <Text style={[globalStyles.locationCardMoreInfo, {minWidth:80}]}>Address: </Text>
                 <Text style={globalStyles.locationCardMoreInfo}>{props.address}</Text>
@@ -34,7 +36,7 @@ const LocationCardDetailed = ( props ) => {
             </HStack>
             <HStack>
                 <Text style={[globalStyles.locationCardMoreInfo, {minWidth:80}]}>Directions: </Text>
-                <TouchableOpacity onPress={()=> openGoogleMaps()}>
+                <TouchableOpacity onPress={()=> openGoogleMaps(props.lat, props.long)}>
                     <Text style={[globalStyles.locationCardMoreInfo, styles.googleMapsLink]}>Open in Google Maps</Text>
                 </TouchableOpacity>
             </HStack>
