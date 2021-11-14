@@ -13,18 +13,18 @@ const LocationResult = ( props ) =>{
 
     useEffect(() => {
         (() => {
-            console.log("filters->", filters)
-            const res = RClocation.data.results.locations.filter(item => {
+            // console.log("filters->", filters)
+            const res = RClocation.locations.filter(item => {
                 item.location.categories.includes(filters)
             });
             console.log(res)
         })();
 
     }, []);
-      console.log(RClocation.data.results.locations.categories)
+      console.log(RClocation.locations.categories)
     return (
-        <View style={globalStyles.screenContainer}>
-            <ScrollView>
+        <View>
+            <ScrollView style={{paddingVertical:30,paddingHorizontal:20}}  showsVerticalScrollIndicator={false} >
                 <ScreenHeading title='Recycling centre locations' center='center'/>
                 <View style={globalStyles.filtersSection}>
                     <View style={{flexDirection:'row', alignItems:'baseline'}}> 
@@ -42,7 +42,7 @@ const LocationResult = ( props ) =>{
                 </View>
                 <View>
                     <FlatList 
-                        data={RClocation.data.results.locations}
+                        data={RClocation.locations}
                         renderItem={({ item }) => (
                             <LocationCard 
                                 item={item} 

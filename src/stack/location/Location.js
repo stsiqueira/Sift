@@ -44,8 +44,8 @@ const Location = ( props ) => {
     }
 
     return (
-        <View style={globalStyles.screenContainer}>
-            <ScrollView>
+        <View  >
+            <ScrollView style={{paddingVertical:30,paddingHorizontal:20}}  showsVerticalScrollIndicator={false} >
                 <ScreenHeading title='Recycling centre locations' center='center'/>
                 <View style={globalStyles.filtersSection}>
                 <Text style={{ fontFamily:'Lato-Bold',

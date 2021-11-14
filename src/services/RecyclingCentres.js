@@ -4,10 +4,8 @@
   
 export default RClocation = {
   "type":"location",
-  "data":{
-     "results":{
-        "count":22,
-        "locations":[
+   "count":22,
+   "locations":[
            {
               "geo":{
                  "lat":"49.26555020",
@@ -625,17 +623,6 @@ export default RClocation = {
               "label":"v"
            }
         ]
-     },
-     "searched_material":{
-        "id":"49",
-        "material":"Car Electronics",
-        "information":"<p class=\"\\\">Aftermarket vehicle audio and/or video systems are collected through Return-It\u2019s province-wide electronics recycling program. Car electronics accepted free-of-charge at Return-It depots includes:</p><ul><li>Car security systems</li><li>In-dash radio, DVD, CD and/or cassette players</li><li>Satellite radio receivers</li><li><div>Stand-alone or in-dash GPS</div></li></ul><p>For a complete list of accepted products, please visit <a href=\"http://www.return-it.ca/electronics\" target=\"_blank\">www.return-it.ca/electronics</a> or call the <a href=\"/services/recycling-hotline\">RCBC Recycling Hotline</a>.</p>",
-        "material_class":"Electronics"
-     },
-     "searched_type":"area",
-     "searched_area":"Vancouver",
-     "message":"Found 22 locations near Vancouver",
-     "footer_message":""
-  }
+
 };
   

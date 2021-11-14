@@ -67,6 +67,8 @@ export const globalStyles = StyleSheet.create({
         color: '#016089',
     },
     filtersSection:{
+        paddingBottom:24,
+        paddingTop:32
     },
     filtersContainer:{
         borderWidth:1,
