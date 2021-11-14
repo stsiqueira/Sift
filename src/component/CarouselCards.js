@@ -1,26 +1,13 @@
 import React from 'react'
 import { StyleSheet, SafeAreaView} from "react-native"
 import Carousel, { Pagination } from 'react-native-snap-carousel'
+import { carouselImages } from '../services/CarouselImages'
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem'
 
 const CarouselCards = () => {
   const isCarousel = React.useRef(null)
   const [index, setIndex] = React.useState(0)
 
-  const carouselImages = [
-    {
-      id:1,
-      imgPath: '../assets/images/carousel/Aluminum.png'
-    },
-    {
-      id:2,
-      imgPath: 'Grass'
-    },
-    {
-      id:3,
-      imgPath: 'Light'
-    }
-  ]
 
   return (
     <SafeAreaView style={styles.container}>

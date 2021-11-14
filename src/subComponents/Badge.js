@@ -8,7 +8,7 @@ const Badge = (props) => {
     return(
             <View style={[styles.badgeContainer, {}]}>
                   <SVGComponent img={props.img}/>
-                <Text style={styles.badgeName}>10th Scan</Text>
+                <Text style={styles.badgeName}>{props.name}</Text>
             </View>
     )
 }
