@@ -134,24 +134,6 @@ const TextSearch = props => {
 			{
 				matches.length > 0 ?
 				(
-					// <ScrollView
-					// 	style={styles.searchSuggestionsContainer}
-					// 	showsVerticalScrollIndicator={true}
-					// 	persistentScrollbar={true}
-					// 	keyboardShouldPersistTaps='always'
-					// >
-					// 	{
-					// 		matches.map((m, index) =>
-					// 			<TouchableOpacity
-					// 				key={m.id}
-					// 				onPress={() => showInstructions(m.id)}
-					// 				style={styles.searchSuggestionButtons}
-					// 			>
-					// 				<Text>{m.name}</Text>
-					// 			</TouchableOpacity>
-					// 		)
-					// 	}
-					// </ScrollView>
 					<FlatList data={matches} renderItem={renderItem} keyExtractor={item => item.id} style={styles.searchSuggestionsContainer} />
 				) : null
 			}

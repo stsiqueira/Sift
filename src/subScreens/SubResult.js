@@ -31,9 +31,6 @@ const SubResult = props => {
 	const [disposeType, setDisposeType] = useState(props.route.params.data.category.replace(/-/g, " "))
 	const [instructions, setinstructions] = useState(props.route.params.data.instructions)
 
-	const [userGeoLocation, setUserGeoLocation] = useState(null)
-	const [errorMsg, setErrorMsg] = useState(null)
-
 	const navigation = useNavigation()
 
 	const compostBinLink = () => {
@@ -44,6 +41,7 @@ const SubResult = props => {
 	Keyboard.dismiss()
 
 	const goToRCL = async (type) => {
+
 		let filters = [];
 		if (type == 'blue box') {
 			filters.push('Plastics');
@@ -59,7 +57,7 @@ const SubResult = props => {
 		}
 
 		let geolocation = await GeoLocation.getCurrentPositionAsync({});
-		setUserGeoLocation(geolocation);
+
 		if (geolocation) {
 			navigation.dispatch({
 				...CommonActions.reset({
