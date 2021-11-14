@@ -69,7 +69,7 @@ const Location = ( props ) => {
                         handleSelect={handleSelect} />
                 </View>
 
-                <View style={globalStyles.searchInputContainer}>
+                <View style={[globalStyles.searchInputContainer,{marginTop:0}]}>
                         <SVGComponent img={searchInput}/>
                         <TextInput
                             onChangeText={text => {
