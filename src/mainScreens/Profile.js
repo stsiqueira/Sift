@@ -44,19 +44,22 @@ const Profile = (props) => {
         id:1,
         name: "Banana",
         imgPath: 'https://picsum.photos/200/300',
-        date: "13 Oct 2021 at 10:12am"
+        date: "13 Oct 2021",
+        time: "10:12am"
       },
       {
         id:2,
         name: "Banana",
         imgPath: 'https://picsum.photos/200/300',
-        date: "13 Oct 2021 at 10:12am"
+        date: "13 Oct 2021",
+        time: "10:12am"
       },
       {
         id:3,
         name: "Banana",
         imgPath: 'https://picsum.photos/200/300',
-        date: "13 Oct 2021 at 10:12am"
+        date: "13 Oct 2021",
+        time: "10:12am"
       }
     ]
   }
@@ -75,7 +78,7 @@ const Profile = (props) => {
                 userData.badges ?
                   userData.badges.map((badge)=>{
                     return (
-                      <Badge key={badge.id} img={badge.image} />
+                      <Badge key={badge.id} img={badge.image} name={badge.name} />
                     )
                   })
                 :
@@ -91,7 +94,7 @@ const Profile = (props) => {
                 userData.history.length > 0 ?
                   userData.history.map((history)=>{
                     return (
-                      <History key={history.id} history={history}/>
+                      <History key={history.id} name={history.name} date={history.date} time={history.time}/>
                     )
                   })
                 :
