@@ -137,7 +137,8 @@ const App = () => {
                             <Text style={globalStyles.iconLabel}> Depots</Text>
                           </View>
                     </View>
-                  )
+                  ),
+                  headerShown: false
                 }}
               />
               <Tab.Screen name="Profile" component={Profile} 
