@@ -41,6 +41,7 @@ const Search = props => {
 					name="SubSearch"
 					component={SubSearch}
 					options={({
+						headerTitle: "Search",
 						headerShown: true,
 						headerStyle: {
 							backgroundColor: '#134075',
