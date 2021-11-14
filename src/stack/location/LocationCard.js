@@ -16,13 +16,7 @@ const LocationCard = ( props ) => {
         { latitude: props.item.geo.lat, longitude: props.item.geo.long },
         { latitude: props.userLat, longitude: props.userLong }
       ))
-    const openGoogleMaps = (userLat, userLong, destinyLat, destinyLong) => {
-        LaunchNavigator.navigate([destinyLat,destinyLong], {
-            start: useLat, userLong
-        })
-            .then(() => console.log("Launched navigator"))
-            .catch((err) => console.error("Error launching navigator: "+err));
-    }
+
     return(
         <TouchableOpacity 
             style={globalStyles.locationCard}
@@ -35,6 +29,9 @@ const LocationCard = ( props ) => {
                             address={props.item.location.address_1}
                             phone={props.item.location.phone_1}
                             distance={distance}
+                            moreInfo={moreInfo}
+                            lat={props.item.geo.lat}
+                            long={props.item.geo.long}
                             />
                         : 
                             <HStack style={{justifyContent:'space-between', width:'100%'}}>
