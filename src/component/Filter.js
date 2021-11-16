@@ -20,15 +20,18 @@ const Filter = ( props) => {
                     <SVGComponent img={props.imageName} />
                 </View>
                 <View style={globalStyles.textContainer}>
-                    <Text style={globalStyles.filterTitle}>{props.title}</Text>
+                    <Text style={{fontFamily:'Lato-Bold', fontSize:18, lineHeight:24,marginBottom:16}}>{props.title}</Text>
                     <HStack  w='100%'> 
-                        <Text style={globalStyles.filterTitle}>{props.example}</Text> 
-                        <Spacer/>
+                        <Text style={{ fontSize:14,}}>{props.example}</Text> 
+
+                    </HStack>
+                </View>
+                <View style={{justifyContent:'center', paddingRight:24}}>
                         <Checkbox 
                             value={isSelected}
                             onChange={()=>props.handleSelect(props.title)}
-                            accessibilityLabel={`${props.title}`}/>
-                    </HStack>
+                            accessibilityLabel={`${props.title}`}
+                            />
                 </View>
             </View>
         </View>
