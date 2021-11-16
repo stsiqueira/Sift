@@ -6,19 +6,21 @@ import { badgeComplexObject, badgeFirstRecycling, badgeFirstScan, badgeTenScans 
 import { globalStyles } from '../styles/globalStyles';
 import SVGComponent from '../svgComponents/SvgComponent';
 
-const History = () =>{
+const History = (props) =>{
+
+  
 
     return (
        <TouchableOpacity style={styles.historyItem}>
            <HStack>
              <SVGComponent img={badgeFirstRecycling}/>
              <VStack px='16px' pt='24px'>
-               <Text style={[globalStyles.fontBold, {fontSize:18, marginBottom:16 }]}>History Title</Text>
+               <Text style={[globalStyles.fontBold, {fontSize:18, marginBottom:16 }]}>{props.name}</Text>
+                 <Text style={styles.historyText}>Item was scanned on </Text>
                <HStack >
-                 <Text style={styles.historyText}>Item scanned on </Text>
-                 <Text style={[globalStyles.fontBold], {fontSize:14, }}>13 Oct 2021</Text>
+                 <Text style={[globalStyles.fontBold, {fontSize:14, }]}>{props.date}</Text>
                  <Text style={styles.historyText}> at </Text>
-                 <Text style={globalStyles.historyDate}>10:13</Text>
+                 <Text style={[globalStyles.fontBold, {fontSize:14, }]}>{props.time}</Text>
                </HStack>
              </VStack>
            </HStack>

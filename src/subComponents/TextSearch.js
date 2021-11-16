@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, TextInput, View, KeyboardAvoidingView, ScrollView, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, TextInput, View, KeyboardAvoidingView, Text, FlatList } from 'react-native'
 import ItemNames from '../assets/jsonData/names.json'
 import ItemData from '../assets/jsonData/data.json'
 import { useHeaderHeight } from '@react-navigation/elements';
 import { searchInput } from '../services/Images'
 import SVGComponent from "../svgComponents/SvgComponent"
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['VirtualizedLists should never be nested inside plain ScrollViews with the same orientation - use another VirtualizedList-backed container instead.', 'Non-serializable values were found in the navigation state']);
 
 const TextSearch = props => {
 	const [keyword, setKeyword] = React.useState('')
@@ -24,6 +28,7 @@ const TextSearch = props => {
 	const handleInputBlurred = () => {
 		setInputFocused(false)
 		setMatches([])
+		setKeyword('')
 	}
 
 	const autoComplete = (keyword) => {
@@ -103,6 +108,22 @@ const TextSearch = props => {
 		// getItemData()
 	}, [])
 
+	const ShowInstructionButton = ({ id, name }) => {
+		return (
+			<TouchableOpacity
+				key={id}
+				onPress={() => {
+					showInstructions(id)
+				}}
+				style={styles.searchSuggestionButtons}
+			>
+				<Text>{name}</Text>
+			</TouchableOpacity>
+		)
+	}
+
+	const renderItem = ({ item }) => <ShowInstructionButton id={item.id} name={item.name} />;
+
 	return (
 		<KeyboardAvoidingView
 			behavior={Platform.OS === "ios" ? "padding" : undefined}
@@ -113,24 +134,7 @@ const TextSearch = props => {
 			{
 				matches.length > 0 ?
 				(
-					<ScrollView
-						style={styles.searchSuggestionsContainer}
-						showsVerticalScrollIndicator={true}
-						persistentScrollbar={true}
-						keyboardShouldPersistTaps='always'
-					>
-						{
-							matches.map((m, index) =>
-								<TouchableOpacity
-									key={m.id}
-									onPress={() => showInstructions(m.id)}
-									style={styles.searchSuggestionButtons}
-								>
-									<Text>{m.name}</Text>
-								</TouchableOpacity>
-							)
-						}
-					</ScrollView>
+					<FlatList data={matches} renderItem={renderItem} keyExtractor={item => item.id} style={styles.searchSuggestionsContainer} />
 				) : null
 			}
 			<View style={styles.searchInputContainer}>
@@ -190,7 +194,8 @@ const styles = StyleSheet.create({
 		borderBottomColor: 'transparent',
 		borderWidth: 1,
 		borderRadius: 6,
-		marginBottom: 12
+		marginBottom: 12,
+		flexGrow: 0
 	},
 	searchSuggestionButtons: {
 		padding: 16,

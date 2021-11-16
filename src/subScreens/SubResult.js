@@ -17,6 +17,9 @@ import {
 } from '../services/Images'
 import SVGComponent from "../svgComponents/SvgComponent"
 import * as WebBrowser from 'expo-web-browser'
+import * as GeoLocation from 'expo-location'
+import { useNavigation } from '@react-navigation/core'
+import { CommonActions } from '@react-navigation/native'
 
 const SubResult = props => {
 	const [pageType, setPageType] = useState(props.route.params.pageType)
@@ -28,12 +31,58 @@ const SubResult = props => {
 	const [disposeType, setDisposeType] = useState(props.route.params.data.category.replace(/-/g, " "))
 	const [instructions, setinstructions] = useState(props.route.params.data.instructions)
 
+	const navigation = useNavigation()
+
 	const compostBinLink = () => {
 		WebBrowser.openBrowserAsync('https://www.google.com/search?q=How+to+create+a+compost+bin&oq=How+to+create+a+compost+bin&aqs=chrome..69i57.193j0j7&sourceid=chrome&ie=UTF-8');
 	}
 
 	// fix for going back directly to search result page
 	Keyboard.dismiss()
+
+	const goToRCL = async (type) => {
+
+		let filters = [];
+		if (type == 'blue box') {
+			filters.push('Plastics');
+		} else if (type == 'grey box') {
+			filters.push('Glass');
+		} else if (type == 'recycling center') {
+			filters.push('Electronics');
+		}
+
+		let { status } = await GeoLocation.requestForegroundPermissionsAsync();
+		if (status !== 'granted') {
+			navigation.navigate('Depots')
+		}
+
+		let geolocation = await GeoLocation.getCurrentPositionAsync({});
+
+		if (geolocation) {
+			navigation.dispatch({
+				...CommonActions.reset({
+					index: 0,
+					routes: [
+						{
+							name: "Depots",
+							state: {
+								routes: [
+									{
+										name: "LocationResult",
+										params: {
+											latitude: geolocation.coords.latitude,
+											longitude: geolocation.coords.longitude,
+											filters: filters
+										}
+									}
+								]
+							}
+						}
+					]
+				})
+			});
+		}
+	}
 
 	return (
 		<>
@@ -209,6 +258,7 @@ const SubResult = props => {
 									</View>
 									<TouchableOpacity
 										style={styles.recyclingCenterButton}
+										onPress={() => goToRCL(disposeType)}
 									>
 										<Text style={styles.recyclingCenterButtonText}>Find Recycling Center</Text>
 									</TouchableOpacity>

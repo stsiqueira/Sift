@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Image, ScrollView, View, Text, TouchableOpacity, Button, FlatList} from "react-native";
 import { globalStyles } from "../../styles/globalStyles";
 import ScreenHeading from "../../subComponents/ScreenHeading";
-import SectionHeading from "../../subComponents/SectionHeading";
 import LocationCard from "./LocationCard";
 import RClocation from "../../services/RecyclingCentres"
 
@@ -13,18 +12,14 @@ const LocationResult = ( props ) =>{
 
     useEffect(() => {
         (() => {
-            console.log("filters->", filters)
-            const res = RClocation.data.results.locations.filter(item => {
-                item.location.categories.includes(filters)
-            });
-            console.log(res)
+                // FETCH BACK END USING FILTER ARRAY
         })();
 
     }, []);
-      console.log(RClocation.data.results.locations.categories)
+
     return (
-        <View style={globalStyles.screenContainer}>
-            <ScrollView>
+        <View>
+            <ScrollView style={{paddingVertical:30,paddingHorizontal:20}}  showsVerticalScrollIndicator={false} >
                 <ScreenHeading title='Recycling centre locations' center='center'/>
                 <View style={globalStyles.filtersSection}>
                     <View style={{flexDirection:'row', alignItems:'baseline'}}> 
@@ -42,7 +37,7 @@ const LocationResult = ( props ) =>{
                 </View>
                 <View>
                     <FlatList 
-                        data={RClocation.data.results.locations}
+                        data={RClocation.locations}
                         renderItem={({ item }) => (
                             <LocationCard 
                                 item={item} 
@@ -55,7 +50,6 @@ const LocationResult = ( props ) =>{
                         showsVerticalScrollIndicator={false}
                     />
                     </View>
-                <Button title="Go back" onPress={() => props.navigation.goBack()} />
             </ScrollView>
         </View>
 )

@@ -3,6 +3,8 @@ import { ScrollView, View, TouchableOpacity, Image, Text, FlatList, StyleSheet }
 import { useNavigation } from "@react-navigation/core";
 import { CommonActions } from '@react-navigation/native';
 import ItemData from '../assets/jsonData/data.json'
+import { globalStyles } from '../styles/globalStyles';
+import Oops from '../subComponents/Oops';
 
 const FallbackLabels = props => {
 
@@ -10,17 +12,6 @@ const FallbackLabels = props => {
     const [b64Image] = useState(props.route.params.searchImage);
     const [itemData] = useState(ItemData);
     const navigation = useNavigation()
-
-    const HandleSearch = () => {
-        navigation.dispatch({
-            ...CommonActions.reset({
-                index: 0,
-                routes: [
-                    { name: "Search" }
-                ]
-            })
-        });
-    }
 
     const showInstructions = (name) => {
 
@@ -59,8 +50,10 @@ const FallbackLabels = props => {
     }
 
     return (
-        <>
-            <ScrollView>
+      <View  >
+      <ScrollView 
+        style={{paddingVertical:30,paddingHorizontal:20}}  
+        showsVerticalScrollIndicator={false} >
                 {
                     labels.length > 0 ?
                         (
@@ -86,16 +79,10 @@ const FallbackLabels = props => {
                             </View>
                         )
                         :
-                        <View style={styles.information}>
-                            <Text>Sorry, we do not recognize this item. Try capturing again or</Text>
-                            <TouchableOpacity onPress={() => HandleSearch()}>
-                                <Text>Search</Text>
-                            </TouchableOpacity>
-                        </View>
-
+                          <Oops/>
                 }
             </ScrollView>
-        </>
+        </View>
     );
 }
 

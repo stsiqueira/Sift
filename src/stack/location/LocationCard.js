@@ -6,6 +6,7 @@ import getDistance from 'geolib/es/getDistance';
 import { bottomArrowIcon, topArrowIcon  } from "../../services/Images";
 import SVGComponent from "../../svgComponents/SvgComponent";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import LocationCardDetailed from "./LocationCardDetailed";
 // import LaunchNavigator from 'react-native-launch-navigator';
 
 const LocationCard = ( props ) => {
@@ -15,64 +16,34 @@ const LocationCard = ( props ) => {
         { latitude: props.item.geo.lat, longitude: props.item.geo.long },
         { latitude: props.userLat, longitude: props.userLong }
       ))
-    const openGoogleMaps = (userLat, userLong, destinyLat, destinyLong) => {
-        LaunchNavigator.navigate([destinyLat,destinyLong], {
-            start: useLat, userLong
-        })
-            .then(() => console.log("Launched navigator"))
-            .catch((err) => console.error("Error launching navigator: "+err));
-    }
+
     return(
         <TouchableOpacity 
             style={globalStyles.locationCard}
             onPress={() => setMoreInfo(!moreInfo)}>
-            <VStack>
-                <HStack >
-                    <VStack>
-                        <Text style={{fontSize:16,lineHeight:20, fontFamily:'Lato-Bold', marginBottom: moreInfo ? 16 : 8}}>{props.item.location.company}</Text>
+
                         {
                         moreInfo ?
-                           <>
-                            <HStack>
-                                <Text style={[globalStyles.locationCardMoreInfo, {minWidth:80}]}>Address: </Text>
-                                <Text style={globalStyles.locationCardMoreInfo}>{props.item.location.address_1}</Text>
-                            </HStack>
-                            <HStack>
-                                <Text style={[globalStyles.locationCardMoreInfo, {minWidth:80}]}>Distance: </Text>
-                                <Text style={globalStyles.locationCardMoreInfo}>{distance / 1000} km</Text>
-                            </HStack>
-                            <HStack>
-                                <Text style={[globalStyles.locationCardMoreInfo, {minWidth:80}]}>Contact: </Text>
-                                <Text style={globalStyles.locationCardMoreInfo}>{props.item.location.phone_1}</Text>
-                            </HStack>
-                            <HStack>
-                                <Text style={[globalStyles.locationCardMoreInfo, {minWidth:80}]}>Directions: </Text>
-                                    <TouchableOpacity onPress={()=> openGoogleMaps()}>
-                                        <Text style={[globalStyles.locationCardMoreInfo, styles.googleMapsLink]}>Open in Google Maps</Text>
-                                    </TouchableOpacity>
-                            </HStack>
-                            <View style={{ flexDirection:'row', justifyContent:'flex-end', paddingVertical:24}}>
-                                <SVGComponent img={topArrowIcon}/>
-                            </View>
-                           </> 
+                          <LocationCardDetailed     
+                            company={props.item.location.company}
+                            address={props.item.location.address_1}
+                            phone={props.item.location.phone_1}
+                            distance={distance}
+                            moreInfo={moreInfo}
+                            lat={props.item.geo.lat}
+                            long={props.item.geo.long}
+                            />
                         : 
-
-                                <Text>{distance / 1000} km</Text>
-              
+                            <HStack style={{justifyContent:'space-between', width:'100%'}}>
+                                <VStack>
+                                    <Text style={{fontSize:16,lineHeight:20, fontFamily:'Lato-Bold', marginBottom: moreInfo ? 16 : 8}}>{props.item.location.company}</Text>
+                                    <Text>{distance / 1000} km</Text>
+                                </VStack>
+                                <View style={{padding:8, justifyContent: 'center'}}>
+                                    <SVGComponent img={bottomArrowIcon}/>
+                                </View> 
+                            </HStack>
                          }
-                    </VStack>
-                    <Spacer/> 
-                    {
-                        moreInfo ?
-                        <></>
-                        :
-                        <View style={{padding:8, justifyContent: 'center'}}>
-                            <SVGComponent img={bottomArrowIcon}/>
-                        </View> 
-                    }
-                </HStack>
-
-            </VStack>
         </TouchableOpacity>
     )
 }
