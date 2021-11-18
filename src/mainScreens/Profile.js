@@ -78,6 +78,7 @@ const Profile = (props) => {
                 userData.badges ?
                   userData.badges.map((badge)=>{
                     return (
+                      
                       <Badge key={badge.id} img={badge.image} name={badge.name} />
                     )
                   })

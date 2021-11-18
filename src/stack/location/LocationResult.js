@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Image, ScrollView, View, Text, TouchableOpacity, Button, FlatList} from "react-native";
 import { globalStyles } from "../../styles/globalStyles";
 import ScreenHeading from "../../subComponents/ScreenHeading";
-import SectionHeading from "../../subComponents/SectionHeading";
 import LocationCard from "./LocationCard";
 import RClocation from "../../services/RecyclingCentres"
 
@@ -80,7 +79,6 @@ const LocationResult = ( props ) =>{
                         showsVerticalScrollIndicator={false}
                     />
                     </View>
-                <Button title="Go back" onPress={() => props.navigation.goBack()} />
             </ScrollView>
         </View>
 )
