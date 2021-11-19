@@ -37,7 +37,7 @@ const LocationCard = ( props ) => {
                             <HStack style={{justifyContent:'space-between', width:'100%'}}>
                                 <VStack>
                                     <Text style={{fontSize:16,lineHeight:20, fontFamily:'Lato-Bold', marginBottom: moreInfo ? 16 : 8}}>{props.item.location.company}</Text>
-                                    <Text>{distance / 1000} km</Text>
+                                    <Text>{(distance / 1000).toFixed(2)} km</Text>
                                 </VStack>
                                 <View style={{padding:8, justifyContent: 'center'}}>
                                     <SVGComponent img={bottomArrowIcon}/>

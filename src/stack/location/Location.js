@@ -32,8 +32,8 @@ const Location = ( props ) => {
 
     const HandleSearch = () => {
         props.navigation.navigate('LocationResult', {
-            latitude:userGeoLocation.coords.latitude ? userGeoLocation.coords.latitude : 49.2248,
-            longitude:userGeoLocation.coords.longitude ? userGeoLocation.coords.longitude : 123.1085 ,
+            latitude: userGeoLocation ? userGeoLocation.coords.latitude : "49.2248",
+            longitude: userGeoLocation ? userGeoLocation.coords.longitude :  "123.1085" ,
             filters: filters
         })
     }
