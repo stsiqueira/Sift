@@ -107,7 +107,7 @@ export default function App() {
   const takePicture = async () => {
     console.log("Clicked");
     if (camera) {
-      const clicked = await camera.takePictureAsync({ base64: true });
+      const clicked = await camera.takePictureAsync({ quality: 0.5, base64: true });
 
       encd64Image = clicked.base64;
       getLabels(clicked.base64)
@@ -225,9 +225,9 @@ export default function App() {
     let fallbackOptions = []
 
     picLabelArray.forEach(function (item) {
-      if (item.confidence > 65 && itemData.find(x => (x.name.toLowerCase() == item.label.toLowerCase()))) {
+      // if (item.confidence > 65 && itemData.find(x => (x.name.toLowerCase() == item.label.toLowerCase()))) {
         fallbackOptions.push(item.label);
-      }
+      // }
     });
 
 
