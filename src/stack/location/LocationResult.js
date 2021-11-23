@@ -41,7 +41,6 @@ const LocationResult = ( props ) =>{
 		})
 		.then(res => res.json())
 		.then(res => {
-			console.log('res', res)
 			setRecycleCentres(res.data.locationByCategories)
 		});
 	}
