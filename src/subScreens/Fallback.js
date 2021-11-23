@@ -17,39 +17,37 @@ const FallbackLabels = props => {
 
         const data = itemData.find(el => el.name === name);
         if (data) {
-    
-          //POST data on HISTORY **CODE**
-          let image = b64Image;
-    
-          navigation.dispatch({
-            ...CommonActions.reset({
-              index: 0,
-              routes: [
-                {
-                  name: "Search",
-                  state: {
+
+            //POST data on HISTORY **CODE**
+            let image = b64Image;
+
+            navigation.dispatch({
+                ...CommonActions.reset({
+                    index: 0,
                     routes: [
-                      {
-                        name: "ScanResult",
-                        params: {
-                          searchID: data.id,
-                          data: data,
-                          pageType: "image",
-                          searchImage: b64Image,
+                        {
+                            name: "Search",
+                            state: {
+                                routes: [
+                                    {
+                                        name: "ScanResult",
+                                        params: {
+                                            searchID: data.id,
+                                            data: data,
+                                            pageType: "image",
+                                            searchImage: b64Image,
+                                        }
+                                    }
+                                ]
+                            }
                         }
-                      }
                     ]
-                  }
-                }
-              ]
-            })
-          });
-    
-        } else { // no results was found for the searched keyword
-          let data = [];
-          showFallbackInstructions(data);      
+                })
+            });
+
+        } else { // no results was found for the searched keyword 
         }
-      }
+    }
 
     return (
       <View  >
@@ -60,6 +58,7 @@ const FallbackLabels = props => {
                     labels.length > 0 ?
                         (
                             <View>
+                                <Text>In order to show you the most relevant results, please select the closest match to the item scanned.</Text>
                                 <FlatList
                                     data={labels}
                                     renderItem={({ item, index }) => {
@@ -68,13 +67,14 @@ const FallbackLabels = props => {
                                         return (
                                             <View key={labels.indexOf(item) + 1} style={{ flexDirection: "row" }}>
                                                 <View>
-                                                    <TouchableOpacity onPress={()=> showInstructions(item)}>
+                                                    <TouchableOpacity onPress={() => showInstructions(item)}>
                                                         <Text> {item} </Text>
                                                     </TouchableOpacity>
                                                 </View>
                                             </View>
                                         )
                                     }}
+                                    key={item => item.id}
                                     keyExtractor={item => item.id}
                                 />
                             </View>

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet, Image, View, Text} from 'react-native';
@@ -14,7 +14,7 @@ import { globalStyles } from './src/styles/globalStyles';
 import { NativeBaseProvider } from 'native-base';
 import SVGComponent from './src/svgComponents/SvgComponent';
 import * as svgImg from './src/services/Images'
-
+import * as SecureStore from 'expo-secure-store';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,13 +33,27 @@ const App = () => {
 		'Lato-Thin': require('./src/assets/fonts/Lato-Thin.ttf'),
 		'Lato-ThinItalic': require('./src/assets/fonts/Lato-ThinItalic.ttf'),
   })
+
+  useEffect(() => {
+    //Check if the Google login is successful previously; try accessing save token/values
+    SecureStore.getItemAsync("g-user").then((result)=>{
+      let response = JSON.parse(result)
+      if (response.user.email) {
+        setLoggedIn(true)
+      } else {
+        setLoggedIn(false)
+      }
+    });
+  }, []);
+
+
   if(!fontsLoaded) {
 		return null;
 	}
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        {!loggedIn ?
+        {loggedIn ?
             <Tab.Navigator
               screenOptions={{
                 tabBarShowLabel: false,
