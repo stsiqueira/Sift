@@ -74,6 +74,7 @@ const FallbackLabels = props => {
                                             </View>
                                         )
                                     }}
+                                    key={item => item.id}
                                     keyExtractor={item => item.id}
                                 />
                             </View>
