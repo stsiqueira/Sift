@@ -11,11 +11,39 @@ const LocationResult = ( props ) =>{
     const [ recycleCentres, setRecycleCentres ] = useState([])
 
     useEffect(() => {
-        (() => {
-                // FETCH BACK END USING FILTER ARRAY
-        })();
-
+			getLocationData()
     }, []);
+
+
+	const getLocationData = () => {
+		fetch("https://sift.wmdd4950.com/gqlservice", {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				query: `
+					{
+						locationByCategories(categories: ${JSON.stringify(filters)}) {
+							geo {
+								lat
+								long
+							}
+							location {
+								id
+								company
+								address_1
+								phone_1
+								categories
+							}
+						}
+					}
+				`
+			}),
+		})
+		.then(res => res.json())
+		.then(res => {
+			setRecycleCentres(res.data.locationByCategories)
+		});
+	}
 
     return (
         <View>
@@ -37,8 +65,8 @@ const LocationResult = ( props ) =>{
                 </View>
                 <View>
                     <FlatList 
-                        data={RClocation.locations}
-                        renderItem={({ item }) => (
+                        data={recycleCentres}
+                        renderItem={({ item, index }) => (
                             <LocationCard 
                                 item={item} 
                                 id={item.id}

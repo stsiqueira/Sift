@@ -60,7 +60,7 @@ const TextSearch = props => {
 	}
 
 	const getItemNames = () => {
-		fetch("http:127.0.0.1:4000/graphql", {
+		fetch("https://sift.wmdd4950.com/gqlservice", {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
@@ -83,7 +83,7 @@ const TextSearch = props => {
 	}
 
 	const getItemData = () => {
-		fetch("http:127.0.0.1:4000/graphql", {
+		fetch("https://sift.wmdd4950.com/gqlservice", {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
@@ -104,8 +104,8 @@ const TextSearch = props => {
 	}
 
 	useEffect(() => {
-		// getItemNames()
-		// getItemData()
+		getItemNames()
+		getItemData()
 	}, [])
 
 	const ShowInstructionButton = ({ id, name }) => {
