@@ -9,7 +9,7 @@ import { useNavigation } from "@react-navigation/core";
 import { CommonActions } from '@react-navigation/native';
 
 
-export default function App() {
+export default function CameraScreen() {
 
   //  camera permissions
   const [hasPermission, setHasPermission] = useState(null);
