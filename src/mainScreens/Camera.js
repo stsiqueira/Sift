@@ -119,7 +119,7 @@ export default function CameraScreen() {
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Image,
-      allowsEditing: true,
+      allowsEditing: false,
       aspect: [2, 2],
       quality: 1,
       base64: true,
@@ -131,12 +131,32 @@ export default function CameraScreen() {
   };
 
   const showInstructions = (id) => {
-
+    console.log("Inside Show Instructions 1");
     const data = itemData.find(el => el.id === id);
     if (data) {
 
       //POST data on HISTORY **CODE**
-      let image = encd64Image;
+      
+      SecureStore.getItemAsync("g-user").then((result) => {
+        console.log("g-user resolved")
+        let response = JSON.parse(result)
+        if (response.user && response.user.email) {
+            //Send file to S3 here
+                uploadtoS3(encd64Image).then((responseImagePath) => {
+                    console.log("Image Service response->", responseImagePath); //Get public S3 image path in response                       
+            //Write history
+                updateHistory(response.user.email, id, responseImagePath);
+            
+            //Update Badge Status
+                updateBadge(response.user.email, 1, true);
+
+            if(id == "Cup with plastic lid and paper sleeve" || id == "Glass bottle with plastic lid"){
+                updateBadge(response.user.email, 4, true);
+            }
+            });
+
+        }
+    });
 
       // navigation.navigate("Search", {
       // 	pageType: 'text',

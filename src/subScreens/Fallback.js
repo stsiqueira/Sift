@@ -5,6 +5,9 @@ import { CommonActions } from '@react-navigation/native';
 import ItemData from '../assets/jsonData/data.json'
 import { globalStyles } from '../styles/globalStyles';
 import Oops from '../subComponents/Oops';
+import * as SecureStore from 'expo-secure-store';
+import { uploadtoS3 } from '../services/ProfileServices'
+import { updateHistory, updateBadge } from '../services/ProfileServices'
 
 const FallbackLabels = props => {
 
@@ -17,9 +20,29 @@ const FallbackLabels = props => {
 
         const data = itemData.find(el => el.name === name);
         if (data) {
+            console.log("Inside Show Instructions 2");
+            //POST data on HISTORY
+            SecureStore.getItemAsync("g-user").then((result) => {
+                console.log("g-user resolved")
+                let response = JSON.parse(result)
+                if (response.user && response.user.email) {
+                    //Send file to S3 here
+                        uploadtoS3(b64Image).then((responseImagePath) => {
+                            console.log("Image Service response->", responseImagePath); //Get public S3 image path in response                       
+                    //Write history
+                        updateHistory(response.user.email, name, responseImagePath);
+                    
+                    //Update Badge Status
+                        updateBadge(response.user.email, 1, true);
 
-            //POST data on HISTORY **CODE**
-            let image = b64Image;
+                    if(name == "Cup with plastic lid and paper sleeve" || name == "Glass bottle with plastic lid"){
+                        updateBadge(response.user.email, 4, true);
+                    }
+                    });
+
+                }
+            });
+
 
             navigation.dispatch({
                 ...CommonActions.reset({
@@ -50,10 +73,10 @@ const FallbackLabels = props => {
     }
 
     return (
-      <View  >
-      <ScrollView 
-        style={{paddingVertical:30,paddingHorizontal:20}}  
-        showsVerticalScrollIndicator={false} >
+        <View  >
+            <ScrollView
+                style={{ paddingVertical: 30, paddingHorizontal: 20 }}
+                showsVerticalScrollIndicator={false} >
                 {
                     labels.length > 0 ?
                         (
@@ -80,7 +103,7 @@ const FallbackLabels = props => {
                             </View>
                         )
                         :
-                          <Oops/>
+                        <Oops />
                 }
             </ScrollView>
         </View>

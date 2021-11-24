@@ -168,7 +168,7 @@ const Profile = (props) => {
                   userData.history.length > 0 ?
                     userData.history.map((history) => {
                       return (
-                        <History key={history.id} name={history.name} date={history.date} time={history.time} />
+                        <History key={history.scannedTime} name={history.itemName} imagePath={history.imgPath} date={history.scannedDate} time={history.scannedTime} />
                       )
                     })
                     :

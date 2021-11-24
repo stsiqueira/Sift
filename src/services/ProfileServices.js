@@ -127,6 +127,32 @@ const updateDBBadge = (userEmail, newBadgeItem) => new Promise((resolve) => {
         });
 });
 
+const s3UploadService = (base64Image) => new Promise((resolve) => {    
+
+    const data = { eImage: base64Image };
+
+    postUrl = "https://sift.wmdd4950.com/awsservice/uploadImgtoS3"
+    console.log(postUrl);
+    //POST request with body equal on data in JSON format
+
+    fetch(postUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then((response) => response.json())
+        //Then with the data from the response in JSON...
+        .then((data) => {
+            resolve(data);
+        })
+        //Then with the error genereted...
+        .catch((error) => {
+            resolve(error);
+        });
+});
+
 const getProfile = async (userEmail) => {    
     try {
         return await getDBProfile(userEmail);       
@@ -147,13 +173,23 @@ const updateName = async (userEmail, newName) => {
 
 }
 
-const updateHistory = async (userEmail, objectName, s3BucketImagePath, scanDate, scanTime) => {    
+const updateHistory = async (userEmail, objectName, s3BucketImagePath) => {    
+
+    const date = new Date().getDate(); 
+    const month = new Date().getMonth() + 1; 
+    const year = new Date().getFullYear(); 
+    const currentDate = date + '/' + month + '/' + year;
+
+    const hours = new Date().getHours();
+    const min = new Date().getMinutes(); 
+    const sec = new Date().getSeconds();
+    const currentTime = hours + ':' + min + ':' + sec; 
 
     let newHistoryItem = {
         itemName: objectName,
         imgPath: s3BucketImagePath,
-        scannedDate: scanDate,
-        scannedTime: scanTime
+        scannedDate: currentDate,
+        scannedTime: currentTime
       }
 
     try {
@@ -178,10 +214,21 @@ const updateBadge = async (userEmail, badgeId, badgeValue) => {
 
 }
 
+const uploadtoS3 = async (base64Image) => {     
+
+    try {
+        return await s3UploadService(base64Image);       
+    }
+    catch (e) {
+        console.log(e);
+    }
+}
+
 module.exports = {
     getProfile,
     createDBProfile,
     updateName,
     updateHistory,
-    updateBadge
+    updateBadge,
+    uploadtoS3
 };
