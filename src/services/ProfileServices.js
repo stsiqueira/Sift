@@ -3,7 +3,7 @@ const dbServiceUrl = "https://sift.wmdd4950.com/dbservice";
 const getDBProfile = (userEmail) => new Promise((resolve) => {
     console.log("3 -Inside DB Profile");
 
-    const getUrl = dbServiceUrl + "/getProfile?id=" + userEmail
+    const getUrl = dbServiceUrl + "/getProfile?id=" + (userEmail ? userEmail : "Invalid")
     console.log("URL -", getUrl);
     fetch(getUrl, {method: 'GET'})
         .then(res => res.json())
