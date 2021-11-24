@@ -3,13 +3,15 @@ import { Center, FlatList, HStack, VStack } from 'native-base';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, Image, ScrollView, SafeAreaView } from 'react-native';
 import { fontSize } from 'styled-system';
-import { badgeComplexObject, badgeFirstRecycling, badgeFirstScan, badgeTenScans, 
-  grayBadgeFirstScan, grayBadgeComplexObject, grayBadgeFirstRecycling, grayBadgeTenScan,  noHistory } from '../services/BadgesImg';
+import Login from '../mainScreens/login';
+import {
+  badgeComplexObject, badgeFirstRecycling, badgeFirstScan, badgeTenScans,
+  grayBadgeFirstScan, grayBadgeComplexObject, grayBadgeFirstRecycling, grayBadgeTenScan, noHistory
+} from '../services/BadgesImg';
 
 import { editIcon } from '../services/Images';
 import { globalStyles } from '../styles/globalStyles';
 import Badge from '../subComponents/Badge';
-import DefaultButton from '../subComponents/Button';
 import History from '../subComponents/History';
 import SectionHeading from '../subComponents/SectionHeading';
 import User from '../subComponents/User';
@@ -70,6 +72,19 @@ const Profile = (props) => {
   const [userName, setUserName] = useState();
   const [userId, setUserId] = useState();
   const [userData, setUserData] = useState();
+  const [loggedIn, setLoggedIn] = useState(true)
+
+  const HandleLogout = () => {
+    setLoggedIn(false);
+  }
+
+  useEffect(() => {
+    if (!loggedIn) {
+      SecureStore.deleteItemAsync('g-user');
+      SecureStore.deleteItemAsync('user-name');
+      SecureStore.deleteItemAsync('user-id');
+    }
+  }, [loggedIn])
 
   useEffect(() => {
     console.log("setUserName", userName);
@@ -104,7 +119,7 @@ const Profile = (props) => {
     }
   }, [userName, userId])
 
-  if (userData) {
+  if (userData && loggedIn) {
     return (
       <SafeAreaView style={globalStyles.container}>
         <ScrollView style={{ paddingVertical: 30 }} showsVerticalScrollIndicator={false}>
@@ -169,13 +184,16 @@ const Profile = (props) => {
               </View>
             </View>
             <View style={{ paddingVertical: 48, paddingHorizontal: 120, marginBottom: 40 }}>
-              <DefaultButton name='LogOut' />
+              <TouchableOpacity style={styles.buttonContainer} onPress={() => HandleLogout()}>
+                <Text style={styles.button}>Log Out</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>
       </SafeAreaView>
     );
   }
+  else if (!loggedIn) { return (<Login setLoggedIn={setLoggedIn} isProfile={true}/>) }
   else return (
     <View style={styles.information}>
       <Text>Loading...</Text>
@@ -216,5 +234,18 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
   },
+  buttonContainer: {
+		backgroundColor: '#134075',
+		textAlign: 'center',
+		padding: 16,
+		borderRadius: 5
+	},
+	button: {
+		color: '#ffffff',
+		fontSize: 16,
+		fontWeight: 'bold',
+		fontFamily: 'Lato-Bold',
+		textAlign: 'center'
+	},
 });
 

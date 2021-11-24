@@ -5,7 +5,7 @@ import * as Google from 'expo-google-app-auth'
 import SVGComponent from '../svgComponents/SvgComponent';
 import { googleButton, Logo } from '../services/Images';
 import * as SecureStore from 'expo-secure-store';
-import {getProfile, createDBProfile} from '../services/ProfileServices'
+import { getProfile, createDBProfile } from '../services/ProfileServices'
 
 
 const Login = (props) => {
@@ -20,51 +20,57 @@ const Login = (props) => {
     }
 
     Google.logInAsync(config)
-      .then((result)=>{
-        console.log("Glogin->",result) //---> Here we have all tokens (ID, ACCESS and REFRESH) along with user scope data.
-        const {type} = result;
+      .then((result) => {
+        console.log("Glogin->", result) //---> Here we have all tokens (ID, ACCESS and REFRESH) along with user scope data.
+        const { type } = result;
 
-        if(type == 'success'){
+        if (type == 'success') {
 
           saveLocal("g-user", result)
-          props.setLoggedIn(true);     
+          props.setLoggedIn(true);
 
-        }else{
+        } else {
           console.log('Google sign in was cancelled')
         }
       })
-      .catch(error=> console.log(error))
+      .catch(error => console.log(error))
 
   }
 
   async function saveLocal(key, value) {
 
-    SecureStore.setItemAsync(key, JSON.stringify(value)).then(async()=>{
-      
-      let getDbProfile =  await getProfile(value.user.email)
-      
-      if(JSON.stringify(getDbProfile) === '{}'){ //User Doesn't Exists        
-        let newUser = {email: value.user.email, name: value.user.name}
+    SecureStore.setItemAsync(key, JSON.stringify(value)).then(async () => {
+
+      let getDbProfile = await getProfile(value.user.email)
+
+      if (JSON.stringify(getDbProfile) === '{}') { //User Doesn't Exists        
+        let newUser = { email: value.user.email, name: value.user.name }
         createDBProfile(newUser);
         console.log("New User Created ->");
       }
 
-    });     
+    });
     SecureStore.setItemAsync("user-name", value.user.name);
     SecureStore.setItemAsync("user-id", value.user.email);
-          
+
   }
 
   return (
     <View style={styles.container}>
       <View>
-        <SVGComponent img={Logo}/>
+        <SVGComponent img={Logo} />
       </View>
-
-      <TouchableOpacity onPress={()=>handleLogin()}>
-        <SVGComponent img={googleButton}/>
+      {props.isProfile ?
+        <>
+          <Text>You are logged out. Sift allows to access its main features.</Text>
+          <Text>For account information, please login with your Google aaccount.</Text>
+        </>
+        : <Text></Text>
+      }
+      <TouchableOpacity onPress={() => handleLogin()}>
+        <SVGComponent img={googleButton} />
       </TouchableOpacity>
-    </View>
+    </View >
   );
 }
 export default Login;
@@ -74,7 +80,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop:128,
-    paddingBottom:88
+    paddingTop: 128,
+    paddingBottom: 88
   },
 });
