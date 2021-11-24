@@ -1,6 +1,7 @@
 
 import { Center, FlatList, HStack, VStack } from 'native-base';
 import React, { useState, useEffect } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { StyleSheet, Text, TouchableOpacity, View, Image, ScrollView, SafeAreaView } from 'react-native';
 import { fontSize } from 'styled-system';
 import Login from '../mainScreens/login';
@@ -89,15 +90,6 @@ const Profile = (props) => {
   useEffect(() => {
     console.log("setUserName", userName);
     console.log("setUserID", userId);
-    SecureStore.getItemAsync("user-name").then((result) => {
-      setUserName(result);
-      console.log("UName:", result);
-    });
-
-    SecureStore.getItemAsync("user-id").then((result) => {
-      setUserId(result);
-      console.log("UId:", result);
-    });
 
     if (userName && userId) {
       getProfile(userId).then((data) => {
@@ -107,17 +99,26 @@ const Profile = (props) => {
 
     }
 
-  }, [])
-
-  useEffect(() => {
-    if (userName && userId) {
-      getProfile(userId).then((data) => {
-        console.log("DBXX->", data.Item);
-        setUserData(data.Item);
-      })
-
-    }
   }, [userName, userId])
+
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log("Screen Focused");
+
+      SecureStore.getItemAsync("user-id").then((result) => {
+        setUserId(result);
+        getProfile(result).then((data) => {
+          console.log("DBXX->", data.Item);
+          setUserData(data.Item);
+        })
+      });
+
+
+
+
+    }, [])
+  );
+
 
   if (userData && loggedIn) {
     return (
@@ -193,7 +194,7 @@ const Profile = (props) => {
       </SafeAreaView>
     );
   }
-  else if (!loggedIn) { return (<Login setLoggedIn={setLoggedIn} isProfile={true}/>) }
+  else if (!loggedIn) { return (<Login setLoggedIn={setLoggedIn} isProfile={true} />) }
   else return (
     <View style={styles.information}>
       <Text>Loading...</Text>
@@ -235,17 +236,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonContainer: {
-		backgroundColor: '#134075',
-		textAlign: 'center',
-		padding: 16,
-		borderRadius: 5
-	},
-	button: {
-		color: '#ffffff',
-		fontSize: 16,
-		fontWeight: 'bold',
-		fontFamily: 'Lato-Bold',
-		textAlign: 'center'
-	},
+    backgroundColor: '#134075',
+    textAlign: 'center',
+    padding: 16,
+    borderRadius: 5
+  },
+  button: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'Lato-Bold',
+    textAlign: 'center'
+  },
 });
 
