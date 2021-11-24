@@ -10,6 +10,8 @@ import { searchInput } from '../../services/Images'
 import SVGComponent from "../../svgComponents/SvgComponent";
 import { Center, Spacer } from "native-base";
 import AutoCompleteInput from "react-native-tomtom-autocomplete";
+import { updateBadge } from '../../services/ProfileServices'
+import * as SecureStore from 'expo-secure-store';
 
 const Location = ( props ) => {
     const [userGeoLocation, setUserGeoLocation] = useState(null);
@@ -31,6 +33,18 @@ const Location = ( props ) => {
       }, []);
 
     const HandleSearch = () => {
+
+        SecureStore.getItemAsync("g-user").then((result) => {
+            console.log("Inside Search Click");
+            let response = JSON.parse(result)
+            if (response.user && response.user.email) {
+
+                //Update Badge Status
+                    updateBadge(response.user.email, 3, true); 
+            }
+        });
+
+
         props.navigation.navigate('LocationResult', {
             latitude: userGeoLocation ? userGeoLocation.coords.latitude : "49.2248",
             longitude: userGeoLocation ? userGeoLocation.coords.longitude :  "123.1085" ,

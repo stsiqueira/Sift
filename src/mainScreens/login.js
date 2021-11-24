@@ -62,8 +62,8 @@ const Login = (props) => {
       </View>
       {props.isProfile ?
         <>
-          <Text>You are logged out. Sift allows to access its main features.</Text>
-          <Text>For account information, please login with your Google aaccount.</Text>
+          <Text>You are logged out. Sift still allows to access its main features.</Text>
+          <Text>For account information, please login with your Google account.</Text>
         </>
         : <Text></Text>
       }
