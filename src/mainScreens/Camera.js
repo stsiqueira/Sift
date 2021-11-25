@@ -121,7 +121,7 @@ export default function CameraScreen() {
       mediaTypes: ImagePicker.MediaTypeOptions.Image,
       allowsEditing: false,
       aspect: [2, 2],
-      quality: 1,
+      quality: 0.5,
       base64: true,
     });
     if (!result.cancelled) {
