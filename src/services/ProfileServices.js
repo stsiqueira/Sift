@@ -1,16 +1,35 @@
+import * as SecureStore from 'expo-secure-store';
 const dbServiceUrl = "https://sift.wmdd4950.com/dbservice";
 
-const getDBProfile = (userEmail) => new Promise((resolve) => {
-    console.log("3 -Inside DB Profile");
+const getIdToken = () => new Promise((resolve) => {
 
+    SecureStore.getItemAsync("g-user").then((result)=>{
+        let response = JSON.parse(result)
+        if (response) {
+            resolve(response.idToken)
+        }
+        else resolve(""); 
+    });
+})
+
+
+
+const getDBProfile = async (userEmail) => new Promise((resolve) => {
+    console.log("3 -Inside DB Profile");
+    getIdToken().then((token)=>{
+        // console.log("accessToken Value->", token);
     const getUrl = dbServiceUrl + "/getProfile?id=" + (userEmail ? userEmail : "Invalid")
     console.log("URL -", getUrl);
-    fetch(getUrl, {method: 'GET'})
+    fetch(getUrl, {method: 'GET',
+     headers: new Headers({
+        'Authorization': 'Bearer ' + token, 
+        'Content-Type': 'application/x-www-form-urlencoded'
+      })})
         .then(res => res.json())
         .then(data => {
             resolve(data);
         })
-
+    });  
 });
 
 
@@ -22,7 +41,7 @@ const createDBProfile = (userData) => new Promise((resolve) => {
 
     const data = { profileData: userData };
 
-    postUrl = dbServiceUrl + "/createProfile"
+    let postUrl = dbServiceUrl + "/createProfile"
     //POST request with body equal on data in JSON format
 
 
@@ -50,7 +69,7 @@ const updateDBName = (userEmail, newName) => new Promise((resolve) => {
 
     const data = { userName: newName };
 
-    postUrl = dbServiceUrl + "/updateProfileName?id=" + userEmail
+    let postUrl = dbServiceUrl + "/updateProfileName?id=" + userEmail
     //POST request with body equal on data in JSON format
 
 
@@ -79,7 +98,7 @@ const updateDBHistory = (userEmail, newHistoryItem) => new Promise((resolve) => 
 
     const data = { historyItem: newHistoryItem };
 
-    postUrl = dbServiceUrl + "/updateHistory?id=" + userEmail
+    let postUrl = dbServiceUrl + "/updateHistory?id=" + userEmail
     //POST request with body equal on data in JSON format
 
 
@@ -105,7 +124,7 @@ const updateDBBadge = (userEmail, newBadgeItem) => new Promise((resolve) => {
 
     const data = { badgedata: newBadgeItem };
 
-    postUrl = dbServiceUrl + "/updateBadge?id=" + userEmail
+    let postUrl = dbServiceUrl + "/updateBadge?id=" + userEmail
     //POST request with body equal on data in JSON format
 
 
@@ -131,7 +150,7 @@ const s3UploadService = (base64Image) => new Promise((resolve) => {
 
     const data = { eImage: base64Image };
 
-    postUrl = "https://sift.wmdd4950.com/awsservice/uploadImgtoS3"
+    let postUrl = "https://sift.wmdd4950.com/awsservice/uploadImgtoS3"
     console.log(postUrl);
     //POST request with body equal on data in JSON format
 
