@@ -122,8 +122,8 @@ const App = () => {
                 options={{
                   tabBarIcon:({focused}) => (
                     <View style={[globalStyles.iconContainer]}>
-                          <View>
-                            <SVGComponent img={svgImg.cameraIcon}/>
+                          <View style={{marginTop:-.4}}>
+                            <SVGComponent style={{borderWidth:1, borderColor:'black'}}img={svgImg.cameraIcon}/>
                           </View>
                           <View >
                           <Text style={globalStyles.iconLabel}>Scan</Text>
