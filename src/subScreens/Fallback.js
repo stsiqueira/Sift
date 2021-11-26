@@ -8,6 +8,9 @@ import Oops from '../subComponents/Oops';
 import * as SecureStore from 'expo-secure-store';
 import { uploadtoS3 } from '../services/ProfileServices'
 import { updateHistory, updateBadge } from '../services/ProfileServices'
+import { marginBottom } from 'styled-system';
+import SVGComponent from '../svgComponents/SvgComponent';
+import { fallbackLogo } from '../services/Images';
 
 const FallbackLabels = props => {
 
@@ -73,15 +76,18 @@ const FallbackLabels = props => {
     }
 
     return (
-        <View  >
+        <View  style={{flex:1}}>
             <ScrollView
-                style={{ paddingVertical: 30, paddingHorizontal: 20 }}
+                style={{ flex:1, paddingVertical: 30, paddingHorizontal: 20 }}
                 showsVerticalScrollIndicator={false} >
                 {
                     labels.length > 0 ?
                         (
-                            <View>
-                                <Text>In order to show you the most relevant results, please select the closest match to the item scanned.</Text>
+                            <View style={styles.fallBackContainer}>
+                                <View style={{ paddingTop:64, paddingBottom:24 ,alignItems:'center'}}>
+                                    <SVGComponent img={fallbackLogo}/>
+                                </View>
+                                <Text style={{fontFamily: 'Lato-Bold', fontSize:18, lineHeight:24, textAlign: 'center', paddingHorizontal:24, marginBottom:32}}>Can you please select which item you scanned?</Text>
                                 <FlatList
                                     data={labels}
                                     renderItem={({ item, index }) => {
@@ -89,7 +95,7 @@ const FallbackLabels = props => {
 
                                         return (
                                             <View key={labels.indexOf(item) + 1} style={{ flexDirection: "row" }}>
-                                                <View>
+                                                <View style={styles.generalLabel}>
                                                     <TouchableOpacity onPress={() => showInstructions(item)}>
                                                         <Text> {item} </Text>
                                                     </TouchableOpacity>
@@ -111,11 +117,23 @@ const FallbackLabels = props => {
 }
 
 const styles = StyleSheet.create({
-    information: {
-        flex: 1,
-        justifyContent: 'center',
-        alignContent: 'center',
-        alignItems: 'center',
+    fallBackContainer:{
+        flex:1,
+        borderWidth:1,
+        borderColor:'#E4E6EE',
+        backgroundColor:'#fff',
+        borderRadius:10,
+        paddingHorizontal:16,
+        minHeight:'100%',
+    },
+    generalLabel:{
+        backgroundColor:'#F3F4F8',
+        borderRadius:5,
+        borderWidth:1,
+        borderColor:'#E4E6EE',
+        flex:1,
+        padding:16,
+        marginBottom:16,
     },
 });
 
