@@ -7,6 +7,9 @@ import postImage from '../services/CameraScan';
 import ItemData from '../assets/jsonData/data.json'
 import { useNavigation } from "@react-navigation/core";
 import { CommonActions } from '@react-navigation/native';
+import * as SecureStore from 'expo-secure-store';
+import { uploadtoS3 } from '../services/ProfileServices'
+import { updateHistory, updateBadge } from '../services/ProfileServices'
 
 
 export default function CameraScreen() {

@@ -153,7 +153,7 @@ const Profile = (props) => {
                       }
                       return (
 
-                        <Badge key={badge.id} img={badgeImage} name={badge.name} />
+                        <Badge key={badge.id} img={badgeImage} name={badge.badgeName} />
                       )
                     })
                     :
