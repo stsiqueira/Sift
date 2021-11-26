@@ -63,8 +63,8 @@ const tomtomApiKey = "ctMg0rMDauN3jPf1SOHXHVJNpJnhmGaS";
 // let tomtomApiKey = "btLyAfWjgUeCnADorxtv6lVysyov8M0l";
 
     return (
-        <View  >
-                <ScrollView style={{paddingVertical:30,paddingHorizontal:20}}  showsVerticalScrollIndicator={false} >
+        <View  style={{}}>
+                <ScrollView style={{paddingVertical:30, paddingHorizontal:20 }}  showsVerticalScrollIndicator={false} >
                     <ScreenHeading title='Recycling centre locations' center='center'/>
                     <View style={globalStyles.filtersSection}>
                     <Text style={{ fontFamily:'Lato-Bold',
@@ -110,7 +110,7 @@ const tomtomApiKey = "ctMg0rMDauN3jPf1SOHXHVJNpJnhmGaS";
                                 </View>
                         </View>
                     <Center>
-                        <TouchableOpacity style={globalStyles.button} onPress={()=> HandleSearch()}>
+                        <TouchableOpacity style={[globalStyles.button,{marginBottom:50}]} onPress={()=> HandleSearch()}>
                             <Text style={{color:'white', fontSize:16, fontFamily:'Lato-Bold'}}>Search</Text>
                         </TouchableOpacity>
                     </Center>

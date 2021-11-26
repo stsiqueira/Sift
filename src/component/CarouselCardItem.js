@@ -3,7 +3,7 @@ import { View, StyleSheet, Dimensions } from "react-native"
 import SVGComponent from '../svgComponents/SvgComponent'
 
 export const SLIDER_WIDTH = Dimensions.get('window').width + 10
-export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.65)
+export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.70)
 
 
 const CarouselCardItem = ({ item, index }) => {
