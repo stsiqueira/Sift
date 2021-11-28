@@ -70,8 +70,6 @@ const Profile = (props) => {
   //   ]
   // }
 
-  const [userName, setUserName] = useState();
-  const [userId, setUserId] = useState();
   const [userData, setUserData] = useState();
   const [loggedIn, setLoggedIn] = useState(true)
 
@@ -81,41 +79,27 @@ const Profile = (props) => {
 
   useEffect(() => {
     if (!loggedIn) {
+      console.log("Deleting Login info");
       SecureStore.deleteItemAsync('g-user');
-      SecureStore.deleteItemAsync('user-name');
       SecureStore.deleteItemAsync('user-id');
     }
   }, [loggedIn])
-
-  useEffect(() => {
-    console.log("setUserName", userName);
-    console.log("setUserID", userId);
-
-    if (userName && userId) {
-      getProfile(userId).then((data) => {
-        console.log("DBXX->", data.Item);
-        setUserData(data.Item);
-      })
-
-    }
-
-  }, [userName, userId])
 
   useFocusEffect(
     React.useCallback(() => {
       console.log("Screen Focused");
 
       SecureStore.getItemAsync("user-id").then((result) => {
-        setUserId(result);
         getProfile(result).then((data) => {
-          console.log("DBXX->", data.Item);
-          setUserData(data.Item);
+          console.log("DBXX->", data);
+          if (data.AuthError) {
+            setLoggedIn(false);
+          }
+          else {
+            setUserData(data.Item);
+          }
         })
       });
-
-
-
-
     }, [])
   );
 
