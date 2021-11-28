@@ -41,7 +41,7 @@ const Login = (props) => {
 
     SecureStore.setItemAsync(key, JSON.stringify(value)).then(async () => {
 
-      let getDbProfile = await getProfile(value.user.email)
+      let getDbProfile = await getProfile(value.user.email) //get Profile (and all other DB Services) will first fetch token and send to backend to validate it.
 
       if (JSON.stringify(getDbProfile) === '{}') { //User Doesn't Exists        
         let newUser = { email: value.user.email, name: value.user.name }
@@ -50,7 +50,6 @@ const Login = (props) => {
       }
 
     });
-    SecureStore.setItemAsync("user-name", value.user.name);
     SecureStore.setItemAsync("user-id", value.user.email);
 
   }
