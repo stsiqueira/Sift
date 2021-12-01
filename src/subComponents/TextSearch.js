@@ -37,7 +37,7 @@ const TextSearch = props => {
 		if (keywordLength >= 1) {
 			let data = [];
 			itemNames.forEach(e1 => {
-				if (e1.id.replace(/_/g, " ").substring(0, keywordLength).toLowerCase().includes(keyword)) {
+				if (e1.name.replace(/_/g, " ").substring(0, keywordLength).toLowerCase().includes(keyword)) {
 					data.push(e1);
 				}
 			});
