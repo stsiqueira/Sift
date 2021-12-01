@@ -65,7 +65,7 @@ const tomtomApiKey = "ctMg0rMDauN3jPf1SOHXHVJNpJnhmGaS";
     return (
         <View  style={{}}>
                 <ScrollView style={{paddingVertical:30, paddingHorizontal:20 }}  showsVerticalScrollIndicator={false} >
-                    <ScreenHeading title='Recycling centre locations' center='center'/>
+                    <ScreenHeading title='Recycling Centre Locations' center='center'/>
                     <View style={globalStyles.filtersSection}>
                     <Text style={{ fontFamily:'Lato-Bold',
                                 fontSize:18,
