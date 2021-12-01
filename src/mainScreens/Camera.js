@@ -148,12 +148,12 @@ export default function CameraScreen() {
                 uploadtoS3(encd64Image).then((responseImagePath) => {
                     console.log("Image Service response->", responseImagePath); //Get public S3 image path in response                       
             //Write history
-                updateHistory(response.user.email, id, responseImagePath);
+                updateHistory(response.user.email, data.name, responseImagePath);
             
             //Update Badge Status
                 updateBadge(response.user.email, 1, true);
 
-            if(id == "Cup with plastic lid and paper sleeve" || id == "Glass bottle with plastic lid"){
+            if(id == "cup_with_plastic_lid_and_paper_sleeve" || id == "glass_bottle_with_plastic_lid"){
                 updateBadge(response.user.email, 4, true);
             }
             });

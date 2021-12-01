@@ -38,7 +38,7 @@ const FallbackLabels = props => {
                     //Update Badge Status
                         updateBadge(response.user.email, 1, true);
 
-                    if(name == "Cup with plastic lid and paper sleeve" || name == "Glass bottle with plastic lid"){
+                    if(name == "Cup with plastic lid and paper sleeve" || name == "Avalon Milk Bottle"){
                         updateBadge(response.user.email, 4, true);
                     }
                     });
