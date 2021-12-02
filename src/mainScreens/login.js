@@ -60,10 +60,12 @@ const Login = (props) => {
         <SVGComponent img={Logo} />
       </View>
       {props.isProfile ?
-        <>
-          <Text>You are logged out. Sift still allows to access its main features.</Text>
-          <Text>For account information, please login with your Google account.</Text>
-        </>
+        <View style={{ width:'100%'}}>
+          <Text style={{fontFamily:'Lato-Bold', fontSize:20 ,lineHeight:22, marginVertical:8, textAlign: 'center'}}>You are logged out.</Text>
+          <Text style={{fontFamily:'Lato-Regular',fontSize:16, marginVertical:5, textAlign: 'center'}}>Sift still allows you to access its main features.</Text>
+          <Text style={{fontFamily:'Lato-Regular', fontSize:16, marginTop:24, textAlign: 'center'}}>For account information, please login with your Google account.</Text>
+
+        </View>
         : <Text></Text>
       }
       <TouchableOpacity onPress={() => handleLogin()}>
@@ -79,7 +81,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 128,
-    paddingBottom: 88
+    paddingTop: 112,
+    paddingBottom: 88,
+    borderWidth:2,
+    paddingHorizontal:20,
   },
 });
