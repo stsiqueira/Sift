@@ -30,6 +30,7 @@
     "react-native-base": "^1.1.0",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-launch-navigator": "^1.0.8",
+    "react-native-pulse": "^1.0.7",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
     "react-native-snap-carousel": "^3.9.1",
