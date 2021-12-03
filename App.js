@@ -16,6 +16,7 @@ import SVGComponent from './src/svgComponents/SvgComponent';
 import * as svgImg from './src/services/Images'
 import * as SecureStore from 'expo-secure-store';
 
+
 const Tab = createBottomTabNavigator();
 
 const App = () => {
@@ -96,6 +97,7 @@ const App = () => {
                 }}
               />
               <Tab.Screen name="Search" component={Search} 
+
                 options={{
                   tabBarIcon:({focused}) => (
                     <View style={[globalStyles.iconContainer]}>  
