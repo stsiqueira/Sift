@@ -312,7 +312,7 @@ export default function CameraScreen() {
                     <SVGComponent img={fallbackLogo}/>
               </View>
 
-            <Text style={{marginTop:100, fontFamily:'Lato-Regular', fontSize:18,lineHeight:22, textAlign:'center'}}>Please wait for a moment while we analyse this picture.</Text>
+            <Text style={{marginTop:100, marginHorizontal:20,fontFamily:'Lato-Regular', fontSize:18,lineHeight:22, textAlign:'center'}}>Please wait for a moment while we analyse this picture.</Text>
       </View>
     );
   }

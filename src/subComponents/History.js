@@ -22,7 +22,9 @@ const History = (props) =>{
                 />
               </View>
              <VStack px='16px' pt='24px'>
-               <Text style={[globalStyles.fontBold, {fontSize:18, marginBottom:16 }]}>{props.name}</Text>
+               <Text numberOfLines={2} style={[globalStyles.fontBold, {fontSize:18, marginBottom:16, flexWrap:'wrap' }]}>
+                 {props.name.replaceAll('_', ' ').substring(0,25)}
+                </Text>
                  <Text style={styles.historyText}>Item was scanned on </Text>
                <HStack >
                  <Text style={[globalStyles.fontBold, {fontSize:14, }]}>{props.date}</Text>
