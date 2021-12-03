@@ -1,16 +1,56 @@
 
 import { HStack, VStack, Image, View } from 'native-base';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { globalStyles } from '../styles/globalStyles';
 import SVGComponent from '../svgComponents/SvgComponent';
+import ItemData from '../assets/jsonData/data.json'
+import { useNavigation } from "@react-navigation/core";
+import { CommonActions } from '@react-navigation/native';
 
-const History = (props) =>{
 
-  
+const History = (props) =>{ 
+
+  const [itemData] = useState(ItemData);
+  const navigation = useNavigation()
+
+  const showInstructions = (itemName) => {
+    console.log("Inside Show Instructions 5");
+    const data = itemData.find(el => el.name === itemName);    
+    if (data) {
+      const id = data.id;
+      // const encd64Image = "";
+      //   console.log("image Path->", props.imagePath);
+      //   fetch(props.imagePath)
+      //       .then(response => { console.log("imageresponse->", response)
+      //     });
+            
+      navigation.dispatch({
+        ...CommonActions.reset({
+          index: 0,
+          routes: [
+            {
+              name: "Search",
+              state: {
+                routes: [
+                  {
+                    name: "ScanResult",
+                    params: {
+                      searchID: id,
+                      data: data
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        })
+      });
+    } 
+  }
 
     return (
-       <TouchableOpacity style={styles.historyItem}>
+       <TouchableOpacity style={styles.historyItem} onPress={() => showInstructions(props.name)}>
            <HStack>
              <View>
                 <Image
@@ -23,7 +63,7 @@ const History = (props) =>{
               </View>
              <VStack px='16px' pt='24px'>
                <Text numberOfLines={2} style={[globalStyles.fontBold, {fontSize:18, marginBottom:16, flexWrap:'wrap' }]}>
-                 {props.name.replaceAll('_', ' ').substring(0,25)}
+                 {props.name}
                 </Text>
                  <Text style={styles.historyText}>Item was scanned on </Text>
                <HStack >
