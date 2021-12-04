@@ -72,6 +72,29 @@ const FallbackLabels = props => {
             });
 
         } else { // no results was found for the searched keyword 
+
+            navigation.dispatch({
+                ...CommonActions.reset({
+                    index: 0,
+                    routes: [
+                        {
+                            name: "Search",
+                            state: {
+                                routes: [
+                                    {
+                                        name: "NoResult",
+                                        params: {
+                                            searchItem: name                                           
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                })
+            });
+
+
         }
     }
 

@@ -3096,8 +3096,8 @@
 		"instructions": "This item can be placed in your yellow bag (single family homes) or Mixed Paper cart (multi-family sites).    "
 	},
 	{
-		"id": "mouse_computer",
-		"name": "Mouse (computer)",
+		"id": "mouse",
+		"name": "Mouse",
 		"category": "recycling-center",
 		"instructions": "This item, as well as other electronic devices, can be dropped off for free as part of Encorp’s Return-It Electronics ‘Take-Back’ recycling program. Other accepted items include  TVs, computers, audio, video and gaming equipment, and musical instruments. Visit Return-It Electronics for program details, including a full list of accepted items and drop off locations. If the item is still in good working condition, consider donating it to a local charity. Contact the RCBC Recycling Hotline for local donation options: 604-732-9253. "
 	},
