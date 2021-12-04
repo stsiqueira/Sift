@@ -61,9 +61,9 @@ const Login = (props) => {
       </View>
       {props.isProfile ?
         <View style={{ width:'100%'}}>
-          <Text style={{fontFamily:'Lato-Bold', fontSize:20 ,lineHeight:22, marginVertical:8, textAlign: 'center'}}>You are logged out.</Text>
-          <Text style={{fontFamily:'Lato-Regular',fontSize:16, marginVertical:5, textAlign: 'center'}}>Sift still allows you to access its main features.</Text>
-          <Text style={{fontFamily:'Lato-Regular', fontSize:16, marginTop:24, textAlign: 'center'}}>For account information, please login with your Google account.</Text>
+          <Text style={{fontFamily:'Lato-Bold', fontSize:20 ,lineHeight:22, marginVertical:8, textAlign: 'center'}}>You are logged out</Text>
+          <Text style={{fontFamily:'Lato-Regular',fontSize:16, marginVertical:5, textAlign: 'center'}}>Sift still allows you to access its main features</Text>
+          <Text style={{fontFamily:'Lato-Regular', fontSize:16, marginTop:24, textAlign: 'center'}}>For account information, please login again</Text>
 
         </View>
         : <Text></Text>

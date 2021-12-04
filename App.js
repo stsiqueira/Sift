@@ -97,7 +97,11 @@ const App = () => {
                 }}
               />
               <Tab.Screen name="Search" component={Search} 
-
+                listeners={({ navigation }) => ({ 
+                  tabPress: () => { 
+                    navigation.navigate('Search', { screen: 'SubSearch' }); 
+                  }, 
+                })}
                 options={{
                   tabBarIcon:({focused}) => (
                     <View style={[globalStyles.iconContainer]}>  
