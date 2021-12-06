@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, Platform } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { StyleSheet, Text, View, Animated, TouchableOpacity, Dimensions, Platform } from 'react-native';
 import { Camera } from 'expo-camera';
 import { FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
@@ -7,6 +7,12 @@ import postImage from '../services/CameraScan';
 import ItemData from '../assets/jsonData/data.json'
 import { useNavigation } from "@react-navigation/core";
 import { CommonActions } from '@react-navigation/native';
+import * as SecureStore from 'expo-secure-store';
+import { uploadtoS3 } from '../services/ProfileServices'
+import { updateHistory, updateBadge } from '../services/ProfileServices'
+import SVGComponent from '../svgComponents/SvgComponent';
+import { fallbackLogo, Logo } from '../services/Images';
+
 
 
 export default function CameraScreen() {
@@ -51,6 +57,33 @@ export default function CameraScreen() {
 
   }, []);
 
+  const scaleCircle = useRef(new Animated.Value(1)).current;
+
+  const circleAnimation = {
+  transform:[
+    {
+      scale:scaleCircle
+    }
+  ]
+  }
+
+  useEffect(() => {
+  ScaleCircle()
+  }, [])
+  const ScaleCircle = () =>{
+    Animated.loop(
+      Animated.sequence([
+      Animated.timing(scaleCircle, {
+        toValue:1.3,
+        duration: 2500,
+      }),
+      Animated.timing(scaleCircle,{
+        toValue:1,
+        duration:2500
+      })
+      ])
+    ).start()
+  }
 
   // set the camera ratio and padding.
   // this code assumes a portrait mode screen
@@ -119,9 +152,9 @@ export default function CameraScreen() {
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Image,
-      allowsEditing: true,
+      allowsEditing: false,
       aspect: [2, 2],
-      quality: 1,
+      quality: 0.5,
       base64: true,
     });
     if (!result.cancelled) {
@@ -131,12 +164,32 @@ export default function CameraScreen() {
   };
 
   const showInstructions = (id) => {
-
+    console.log("Inside Show Instructions 1");
     const data = itemData.find(el => el.id === id);
     if (data) {
 
       //POST data on HISTORY **CODE**
-      let image = encd64Image;
+      
+      SecureStore.getItemAsync("g-user").then((result) => {
+        console.log("g-user resolved")
+        let response = JSON.parse(result)
+        if (response.user && response.user.email) {
+            //Send file to S3 here
+                uploadtoS3(encd64Image).then((responseImagePath) => {
+                    console.log("Image Service response->", responseImagePath); //Get public S3 image path in response                       
+            //Write history
+                updateHistory(response.user.email, data.name, responseImagePath);
+            
+            //Update Badge Status
+                updateBadge(response.user.email, 1, true);
+
+            if(id == "cup_with_plastic_lid_and_paper_sleeve" || id == "glass_bottle_with_plastic_lid"){
+                updateBadge(response.user.email, 4, true);
+            }
+            });
+
+        }
+    });
 
       // navigation.navigate("Search", {
       // 	pageType: 'text',
@@ -249,7 +302,17 @@ export default function CameraScreen() {
   if (analyzing === true) {
     return (
       <View style={styles.information}>
-        <Text>Analyzing the Scanned Image</Text>
+              <Animated.View style={[{ backgroundColor:'#8CE3FF',borderRadius:80, width:160, height:160, justifyContent:'center', alignItems:'center'}, circleAnimation]}>
+                <View style={[{ backgroundColor:'#D8F5FF',borderRadius:70, width:140, height:140, justifyContent:'center', alignItems:'center'}]}>
+                  <View style={[{ backgroundColor:'#FFF', borderRadius:60,width:120, height:120, justifyContent:'center', alignItems:'center'}]}>
+                  </View>
+                </View>
+              </Animated.View>
+              <View style={{marginTop:-110}}>
+                    <SVGComponent img={fallbackLogo}/>
+              </View>
+
+            <Text style={{marginTop:100, marginHorizontal:20,fontFamily:'Lato-Regular', fontSize:18,lineHeight:22, textAlign:'center'}}>Please wait for a moment while we analyse this picture.</Text>
       </View>
     );
   }

@@ -1513,7 +1513,7 @@
 	},
 	{
 		"id": "glass_bottle_with_plastic_lid",
-		"name": "Glass bottle with plastic lid"
+		"name": "Avalon Milk Bottle"
 	},
 	{
 		"id": "glass_cleaner_plastic_bottle",
@@ -2064,8 +2064,8 @@
 		"name": "Moulded boxboard packaging"
 	},
 	{
-		"id": "mouse_computer",
-		"name": "Mouse (computer)"
+		"id": "mouse",
+		"name": "Mouse"
 	},
 	{
 		"id": "mouthwash_bottle",

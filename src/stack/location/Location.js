@@ -10,6 +10,8 @@ import { searchInput } from '../../services/Images'
 import SVGComponent from "../../svgComponents/SvgComponent";
 import { Center, Spacer } from "native-base";
 import AutoCompleteInput from "react-native-tomtom-autocomplete";
+import { updateBadge } from '../../services/ProfileServices'
+import * as SecureStore from 'expo-secure-store';
 
 const Location = ( props ) => {
     const [userGeoLocation, setUserGeoLocation] = useState(null);
@@ -31,6 +33,18 @@ const Location = ( props ) => {
       }, []);
 
     const HandleSearch = () => {
+
+        SecureStore.getItemAsync("g-user").then((result) => {
+            console.log("Inside Search Click");
+            let response = JSON.parse(result)
+            if (response.user && response.user.email) {
+
+                //Update Badge Status
+                    updateBadge(response.user.email, 3, true); 
+            }
+        });
+
+
         props.navigation.navigate('LocationResult', {
             latitude: userGeoLocation ? userGeoLocation.coords.latitude : "49.2248",
             longitude: userGeoLocation ? userGeoLocation.coords.longitude :  "123.1085" ,
@@ -49,9 +63,9 @@ const tomtomApiKey = "ctMg0rMDauN3jPf1SOHXHVJNpJnhmGaS";
 // let tomtomApiKey = "btLyAfWjgUeCnADorxtv6lVysyov8M0l";
 
     return (
-        <View  >
-                <ScrollView style={{paddingVertical:30,paddingHorizontal:20}}  showsVerticalScrollIndicator={false} >
-                    <ScreenHeading title='Recycling centre locations' center='center'/>
+        <View  style={{}}>
+                <ScrollView style={{paddingVertical:30, paddingHorizontal:20 }}  showsVerticalScrollIndicator={false} >
+                    <ScreenHeading title='Recycling Centre Locations' center='center'/>
                     <View style={globalStyles.filtersSection}>
                     <Text style={{ fontFamily:'Lato-Bold',
                                 fontSize:18,
@@ -96,7 +110,7 @@ const tomtomApiKey = "ctMg0rMDauN3jPf1SOHXHVJNpJnhmGaS";
                                 </View>
                         </View>
                     <Center>
-                        <TouchableOpacity style={globalStyles.button} onPress={()=> HandleSearch()}>
+                        <TouchableOpacity style={[globalStyles.button,{marginBottom:50}]} onPress={()=> HandleSearch()}>
                             <Text style={{color:'white', fontSize:16, fontFamily:'Lato-Bold'}}>Search</Text>
                         </TouchableOpacity>
                     </Center>

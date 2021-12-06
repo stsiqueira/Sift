@@ -16,6 +16,7 @@ import SVGComponent from './src/svgComponents/SvgComponent';
 import * as svgImg from './src/services/Images'
 import * as SecureStore from 'expo-secure-store';
 
+
 const Tab = createBottomTabNavigator();
 
 const App = () => {
@@ -96,6 +97,11 @@ const App = () => {
                 }}
               />
               <Tab.Screen name="Search" component={Search} 
+                listeners={({ navigation }) => ({ 
+                  tabPress: () => { 
+                    navigation.navigate('Search', { screen: 'SubSearch' }); 
+                  }, 
+                })}
                 options={{
                   tabBarIcon:({focused}) => (
                     <View style={[globalStyles.iconContainer]}>  
@@ -122,8 +128,8 @@ const App = () => {
                 options={{
                   tabBarIcon:({focused}) => (
                     <View style={[globalStyles.iconContainer]}>
-                          <View>
-                            <SVGComponent img={svgImg.cameraIcon}/>
+                          <View style={{marginTop:-.4}}>
+                            <SVGComponent style={{borderWidth:1, borderColor:'black'}}img={svgImg.cameraIcon}/>
                           </View>
                           <View >
                           <Text style={globalStyles.iconLabel}>Scan</Text>

@@ -1,15 +1,18 @@
 
 import { Center, FlatList, HStack, VStack } from 'native-base';
 import React, { useState, useEffect } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { StyleSheet, Text, TouchableOpacity, View, Image, ScrollView, SafeAreaView } from 'react-native';
 import { fontSize } from 'styled-system';
-import { badgeComplexObject, badgeFirstRecycling, badgeFirstScan, badgeTenScans, 
-  grayBadgeFirstScan, grayBadgeComplexObject, grayBadgeFirstRecycling, grayBadgeTenScan,  noHistory } from '../services/BadgesImg';
+import Login from '../mainScreens/login';
+import {
+  badgeComplexObject, badgeFirstRecycling, badgeFirstScan, badgeTenScans,
+  grayBadgeFirstScan, grayBadgeComplexObject, grayBadgeFirstRecycling, grayBadgeTenScan, noHistory
+} from '../services/BadgesImg';
 
 import { editIcon } from '../services/Images';
 import { globalStyles } from '../styles/globalStyles';
 import Badge from '../subComponents/Badge';
-import DefaultButton from '../subComponents/Button';
 import History from '../subComponents/History';
 import SectionHeading from '../subComponents/SectionHeading';
 import User from '../subComponents/User';
@@ -67,44 +70,41 @@ const Profile = (props) => {
   //   ]
   // }
 
-  const [userName, setUserName] = useState();
-  const [userId, setUserId] = useState();
   const [userData, setUserData] = useState();
+  const [loggedIn, setLoggedIn] = useState(true)
+
+  const HandleLogout = () => {
+    setLoggedIn(false);
+  }
 
   useEffect(() => {
-    console.log("setUserName", userName);
-    console.log("setUserID", userId);
-    SecureStore.getItemAsync("user-name").then((result) => {
-      setUserName(result);
-      console.log("UName:", result);
-    });
-
-    SecureStore.getItemAsync("user-id").then((result) => {
-      setUserId(result);
-      console.log("UId:", result);
-    });
-
-    if (userName && userId) {
-      getProfile(userId).then((data) => {
-        console.log("DBXX->", data.Item);
-        setUserData(data.Item);
-      })
-
+    if (!loggedIn) {
+      console.log("Deleting Login info");
+      SecureStore.deleteItemAsync('g-user');
+      SecureStore.deleteItemAsync('user-id');
     }
+  }, [loggedIn])
 
-  }, [])
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log("Screen Focused");
 
-  useEffect(() => {
-    if (userName && userId) {
-      getProfile(userId).then((data) => {
-        console.log("DBXX->", data.Item);
-        setUserData(data.Item);
-      })
+      SecureStore.getItemAsync("user-id").then((result) => {
+        getProfile(result).then((data) => {
+          console.log("DBXX->", data);
+          if (data.AuthError) {
+            setLoggedIn(false);
+          }
+          else {
+            setUserData(data.Item);
+          }
+        })
+      });
+    }, [])
+  );
 
-    }
-  }, [userName, userId])
 
-  if (userData) {
+  if (userData && loggedIn) {
     return (
       <SafeAreaView style={globalStyles.container}>
         <ScrollView style={{ paddingVertical: 30 }} showsVerticalScrollIndicator={false}>
@@ -137,7 +137,7 @@ const Profile = (props) => {
                       }
                       return (
 
-                        <Badge key={badge.id} img={badgeImage} name={badge.name} />
+                        <Badge key={badge.id} img={badgeImage} name={badge.badgeName} />
                       )
                     })
                     :
@@ -153,7 +153,7 @@ const Profile = (props) => {
                   userData.history.length > 0 ?
                     userData.history.map((history) => {
                       return (
-                        <History key={history.id} name={history.name} date={history.date} time={history.time} />
+                        <History key={history.scannedTime} name={history.itemName} imagePath={history.imgPath} date={history.scannedDate} time={history.scannedTime} />
                       )
                     })
                     :
@@ -169,13 +169,16 @@ const Profile = (props) => {
               </View>
             </View>
             <View style={{ paddingVertical: 48, paddingHorizontal: 120, marginBottom: 40 }}>
-              <DefaultButton name='LogOut' />
+              <TouchableOpacity style={styles.buttonContainer} onPress={() => HandleLogout()}>
+                <Text style={styles.button}>Log Out</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>
       </SafeAreaView>
     );
   }
+  else if (!loggedIn) { return (<Login setLoggedIn={setLoggedIn} isProfile={true} />) }
   else return (
     <View style={styles.information}>
       <Text>Loading...</Text>
@@ -215,6 +218,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center',
+  },
+  buttonContainer: {
+    backgroundColor: '#134075',
+    textAlign: 'center',
+    padding: 16,
+    borderRadius: 5
+  },
+  button: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    fontFamily: 'Lato-Bold',
+    textAlign: 'center'
   },
 });
 

@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import SubSearch from '../subScreens/SubSearch';
 import SubResult from '../subScreens/SubResult';
 import FallbackLabels from '../subScreens/Fallback';
+import NoResult from '../subScreens/NoResult';
 import { Button, Keyboard, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 const Stack = createNativeStackNavigator();
@@ -96,6 +97,22 @@ const Search = props => {
 					component={FallbackLabels}
 					options={{
 						headerTitle: "Scan",
+						headerShown: true,
+						headerStyle: {
+							backgroundColor: '#134075',
+						},
+						headerTintColor: '#ffffff',
+						headerTitleStyle: {
+							fontWeight: 'bold',
+						},
+						headerBackTitleVisible: false
+					}}
+				/>
+				<Stack.Screen
+					name="NoResult"
+					component={NoResult}
+					options={{
+						headerTitle: "Item not found",
 						headerShown: true,
 						headerStyle: {
 							backgroundColor: '#134075',

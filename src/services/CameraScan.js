@@ -4,7 +4,7 @@ const callAWSService = (type, encodedImage) => new Promise((resolve) => {
     //Obj of data to send in future like a dummyDb
     const data = { eImage: encodedImage };
 
-    postUrl = "https://sift.wmdd4950.com/awsservice" + (type == "custom" ? "/getcustomlabels" : "/getlabels")
+    let postUrl = "https://sift.wmdd4950.com/awsservice" + (type == "custom" ? "/getcustomlabels" : "/getlabels")
     console.log(postUrl);
     //POST request with body equal on data in JSON format
 
