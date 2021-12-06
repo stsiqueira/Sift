@@ -436,7 +436,7 @@ export const recyclingCentreIllustration = `
 `
 
 export const cupsWidthPlasticLidAndPaperSleeveIllustration = `
-<svg width="335" height="286" viewBox="0 0 335 286" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="301" height="256" viewBox="0 0 335 286" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="0.5" y="0.5" width="334" height="285" rx="4.5" fill="white" stroke="white"/>
 <path d="M86.5625 35H67.875C66.9167 35 65 35.7355 65 38.6774C65 42.6 65.9583 43.5806 66.4375 43.5806V44.8065C66.4375 58.5355 65.7986 79.129 63.5625 87.7097C60.6875 98.7419 42 126.935 42 145.323V254.419C42 260.303 47.75 262.591 50.625 263H96.625C106.975 263 110.521 257.28 111 254.419V144.097C111 128.161 93.75 97.5161 90.875 87.7097C88 77.9032 86.5625 43.5806 88 43.5806C89.4375 43.5806 89.4375 42.3548 89.4375 38.6774C89.4375 35.7355 87.5208 35 86.5625 35Z" fill="#91DECC"/>
 <rect x="62" y="34" width="29" height="15" rx="2" fill="#CFCFCF"/>
@@ -450,7 +450,7 @@ export const cupsWidthPlasticLidAndPaperSleeveIllustration = `
 `
 
 export const glassBottlesWithPlasticLid = `
-<svg width="335" height="284" viewBox="0 0 335 284" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="301" height="256" viewBox="0 0 335 284" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="0.5" y="0.5" width="334" height="283" rx="4.5" fill="white" stroke="white"/>
 <path d="M107.729 205.076L123 64H25L40.2707 205.076C40.8202 210.153 45.1063 214 50.2127 214H97.7873C102.894 214 107.18 210.153 107.729 205.076Z" fill="#DE5851"/>
 <path d="M21 59.3972V63C21 64.6569 22.3431 66 24 66H124C125.657 66 127 64.6569 127 63V59.3972C127 58.484 126.26 57.7436 125.346 57.7436C124.603 57.7436 123.951 57.2473 123.753 56.5307L120.619 45.2004C120.26 43.9003 119.077 43 117.728 43H30.272C28.9231 43 27.7401 43.9003 27.3805 45.2004L24.2475 56.5307C24.0493 57.2473 23.3972 57.7436 22.6537 57.7436C21.7404 57.7436 21 58.484 21 59.3972Z" fill="#885E48"/>

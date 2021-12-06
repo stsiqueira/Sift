@@ -301,7 +301,11 @@ const styles = StyleSheet.create({
 		borderColor: '#E4E6EE',
 		borderWidth: 1,
 		borderRadius: 5,
-		marginBottom: 16
+		marginBottom: 16,
+		alignSelf: 'center',
+		width: '100%',
+		alignItems: 'center',
+		justifyContent: 'center'
 	},
 	specialCardTwo: {
 		padding: 20,
