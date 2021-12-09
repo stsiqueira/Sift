@@ -1,5 +1,5 @@
 import React, { useState, useEffect }from "react";  
-import { Image, ScrollView, View, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView } from "react-native";
+import { Image, ScrollView, View, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform } from "react-native";
 import Filter from "../../component/Filter";
 import { globalStyles } from "../../styles/globalStyles";
 import ScreenHeading from "../../subComponents/ScreenHeading";
@@ -12,6 +12,7 @@ import { Center, Spacer } from "native-base";
 import AutoCompleteInput from "react-native-tomtom-autocomplete";
 import { updateBadge } from '../../services/ProfileServices'
 import * as SecureStore from 'expo-secure-store';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Location = ( props ) => {
     const [userGeoLocation, setUserGeoLocation] = useState(null);
@@ -63,8 +64,7 @@ const tomtomApiKey = "ctMg0rMDauN3jPf1SOHXHVJNpJnhmGaS";
 // let tomtomApiKey = "btLyAfWjgUeCnADorxtv6lVysyov8M0l";
 
     return (
-        <View  style={{}}>
-                <ScrollView style={{paddingVertical:30, paddingHorizontal:20 }}  showsVerticalScrollIndicator={false} >
+        <KeyboardAwareScrollView style={{paddingVertical:30, paddingHorizontal:20 }} enableOnAndroid={true} showsVerticalScrollIndicator={false}>
                     <ScreenHeading title='Recycling Centre Locations' center='center'/>
                     <View style={globalStyles.filtersSection}>
                     <Text style={{ fontFamily:'Lato-Bold',
@@ -87,6 +87,7 @@ const tomtomApiKey = "ctMg0rMDauN3jPf1SOHXHVJNpJnhmGaS";
                             imageName={svgImg.glass}
                             handleSelect={handleSelect} />
                     </View>
+
                         <View style={[globalStyles.searchInputContainer,{marginTop:0}]}>
                                 <SVGComponent img={searchInput}/>
                                 <View style={{ flex:1, paddingHorizontal:16,}}> 
@@ -102,21 +103,23 @@ const tomtomApiKey = "ctMg0rMDauN3jPf1SOHXHVJNpJnhmGaS";
                                         listItemsContainerStyle={{
                                             borderBottomWidth: 1,
                                             borderBottomColor: "#E4E6EE;",
-                                            maxWidth:280,
+                                            maxWidth:260,
+                                            fontFamily:'Lato-Regular',
+                                            fontSize:16,
                                         }}
-                                        bottomDivider
+                                        // bottomDivider
+                                        topDivider
                                         tomtomOptions={{ key: tomtomApiKey }}
                                         />
                                 </View>
                         </View>
+   
                     <Center>
-                        <TouchableOpacity style={[globalStyles.button,{marginBottom:50}]} onPress={()=> HandleSearch()}>
-                            <Text style={{color:'white', fontSize:16, fontFamily:'Lato-Bold'}}>Search</Text>
+                        <TouchableOpacity style={[globalStyles.button,{marginBottom:50, width:130}]} onPress={()=> HandleSearch()}>
+                            <Text style={{color:'white', fontSize:16, fontFamily:'Lato-Bold',textAlign:'center'}}>Search</Text>
                         </TouchableOpacity>
                     </Center>
-
-                </ScrollView>
-            </View>
+            </KeyboardAwareScrollView>
     )
 }
 export default Location
