@@ -63,7 +63,7 @@ const History = (props) =>{
               </View>
              <VStack px='16px' pt='24px'>
                <Text numberOfLines={2} style={[globalStyles.fontBold, {fontSize:18, marginBottom:16, flexWrap:'wrap' }]}>
-                 {props.name}
+                 {props.name.length >25 ? `${props.name.substring(0,25)}...`: props.name.substring(0,25)}
                 </Text>
                  <Text style={styles.historyText}>Item was scanned on </Text>
                <HStack >
